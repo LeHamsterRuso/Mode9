@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_BILLBOARD()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_BILLBOARD()</h1>
+    <p><strong>MODE9_BILLBOARD( &lt;id&gt; , &lt;wx&gt; , &lt;wy&gt; , &lt;wz&gt; , &lt;base size&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Places a process inside the 3D world as if it were a cardboard cut-out: a flat drawing that always faces the camera and appears larger or smaller depending on how near or far it is. This is called a <strong>billboard</strong>, and it is the classic technique (the same as <strong>mode 7</strong>) for putting characters, enemies, trees or torches into a 3D scene without modelling them in 3D.</p>
+    <p>You tell it where in the world the sprite goes (wx, wy, wz) and the function calculates which part of the screen it falls on and what size it should appear at, writing those values into the process fields. It returns <strong>1</strong> if the sprite is visible and <strong>0</strong> if it is not (because it is behind the camera or occluded by a wall).</p>
+    <p><strong>Multi-view sprites:</strong> just like in mode 7, you can make a character look different depending on the viewing angle (front, back, side...). For this the process must have a table of graphics in its <strong>xgraph</strong> field and its orientation in <strong>angle</strong>; mode 9 automatically picks the appropriate drawing based on the angle from which the camera views it.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">id</td><td>The process you want to display as a sprite in the 3D world.</td></tr>
+      <tr><td class="par">wx, wy, wz</td><td>Where to place it in the world (wx, wy on the ground plane; wz = height), in game units.</td></tr>
+      <tr><td class="par">base size</td><td>The sprite size at normal distance (same as the <strong>size</strong> field). Mode 9 scales it up or down according to distance.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 1 if the sprite is visible, 0 if it is hidden (behind the camera or occluded).</p>
+    <div class="nota"><strong>Note:</strong> For stationary sprites (a torch, a tree) there is a more convenient automatic way: simply set <strong>ctype = c_m9</strong> in the process and leave its world coordinates in x, y, z; mode 9 draws it automatically each frame without any explicit call (see <a href="mode9_ctype.html">MODE9_CTYPE()</a>).</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">PROCESS</span> torch<span class="syntax3">(</span>wx<span class="syntax3">,</span> wy<span class="syntax3">,</span> wz<span class="syntax3">)</span>
+<span class="syntax1">BEGIN</span>
+    graph <span class="syntax3">=</span> <span class="syntax2">11</span><span class="syntax3">;</span>
+    <span class="syntax1">LOOP</span>
+        <span class="syntax5">// project manually each frame</span>
+        <span class="syntax1">if</span> <span class="syntax3">(</span>MODE9_BILLBOARD<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">,</span> wx<span class="syntax3">,</span> wy<span class="syntax3">,</span> wz<span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">))</span>
+            <span class="syntax5">// visible: DLL has already set x, y, size, z</span>
+        <span class="syntax1">end</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+<span class="syntax1">END</span>
+</pre>
+    </div>
+    <p>If you prefer not to call it every frame, assign <strong>ctype = c_m9</strong> to the process and keep x, y, z in world coordinates: mode 9 projects it automatically.</p>
+    <hr />
+    See: <a href="mode9_project.html">MODE9_PROJECT()</a> - <a href="mode9_occlude.html">MODE9_OCCLUDE()</a> - <a href="mode9_ctype.html">MODE9_CTYPE()</a> - <a href="mode9_loadfpg.html">MODE9_LOADFPG()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

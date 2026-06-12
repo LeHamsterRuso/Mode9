@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_STEP()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_STEP()</h1>
+    <p><strong>MODE9_STEP( &lt;altura&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Define la altura máxima (uds DIV2) que el jugador sube por sí solo: escaleras y rampas. Los muros más bajos que ese valor no bloquean (se suben como un peldaño) y la cámara se apoya en el suelo que tiene debajo. Con <strong>0</strong> se desactiva.</p>
+    <p>La DLL solo SUBE la z al pisar suelo; la GRAVEDAD (la caída) la gestiona el PRG restando a la z cada frame.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">altura</td><td>Altura máxima de peldaño/escalón que se sube automáticamente, en uds DIV2. 0 = desactivado.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <div class="nota"><strong>Nota:</strong> Requiere las colisiones activadas: no funciona si has hecho <a href="mode9_collision.html">MODE9_COLLISION(0)</a>.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+MODE9_STEP<span class="syntax3">(</span><span class="syntax2">70</span><span class="syntax3">);</span>   <span class="syntax5">// sube escalones de hasta 70 uds</span>
+
+<span class="syntax5">// La gravedad la aplica el PRG cada frame:</span>
+fall_v <span class="syntax3">+=</span> <span class="syntax2">4</span><span class="syntax3">;</span>            <span class="syntax5">// acelerar la caída</span>
+m9<span class="syntax3">.</span>height <span class="syntax3">-=</span> fall_v<span class="syntax3">;</span>    <span class="syntax5">// bajar</span>
+<span class="syntax1">if</span> <span class="syntax3">(</span>m9<span class="syntax3">.</span>height <span class="syntax3">&lt;</span> <span class="syntax2">70</span><span class="syntax3">)</span>     <span class="syntax5">// tope al tocar suelo</span>
+    m9<span class="syntax3">.</span>height <span class="syntax3">=</span> <span class="syntax2">70</span><span class="syntax3">;</span> fall_v <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span>
+<span class="syntax1">end</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_collision.html">MODE9_COLLISION()</a> - <a href="mode9_collide.html">MODE9_COLLIDE()</a> - <a href="mode9_set.html">MODE9_SET()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - Por dónde empezar</title>
+    <meta name="description" content="Guía por etapas del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>Por dónde empezar</h1>
+    <p>Esta guía monta un juego en modo 9 <strong>por etapas</strong>, de lo más
+    simple a lo más completo. Cada etapa añade una sola cosa nueva sobre la anterior, así que puedes
+    pararte donde quieras y ya tendrás algo que funciona. Sigue el mismo orden que los ejemplos
+    <strong>MODE9_01</strong> a <strong>MODE9_05</strong> que vienen con la DLL.</p>
+    <div class="nota"><strong>Lo mínimo que necesitas:</strong> un escenario en
+    <strong>.OBJ</strong> (triangulado, Y hacia arriba) y su textura en <strong>.MAP</strong>. Si aún
+    no tienes ninguno, usa los del ejemplo (CASTLE.OBJ + MAP/CASTLE.MAP). Para preparar tus propios
+    modelos, mira <a href="modelos.html">Modelos OBJ</a>.</div>
+
+    <div class="cat">
+      <h2>Etapa 1 &middot; Un mundo vacío por el que pasearte</h2>
+      <p>El esqueleto de todo juego en modo 9. Cargas el escenario con
+      <a href="load_wld9.html">LOAD_WLD9()</a>, colocas la cámara con <a href="mode9_set.html">MODE9_SET()</a>
+      y arrancas el render con <a href="start_mode9.html">START_MODE9()</a>. A partir de ahí, mover la
+      cámara es como mover cualquier proceso de DIV: <strong>advance()</strong> para avanzar y cambiar
+      <strong>angle</strong> para girar.</p>
+      <div class="ejemplo">
+        <div class="ejtitulo">
+          Lo esencial:
+        </div>
+<pre class="ejprograma">
+<span class="syntax1">PROGRAM</span> paso1<span class="syntax3">;</span>
+<span class="syntax1">IMPORT</span> <span class="syntax4">&quot;MODE9.DLL&quot;</span><span class="syntax3">;</span>
+<span class="syntax1">CONST</span>
+    c_m9 <span class="syntax3">=</span> <span class="syntax2">200</span><span class="syntax3">;</span>
+<span class="syntax1">GLOBAL</span>
+    <span class="syntax1">STRUCT</span> m9   z<span class="syntax3">;</span> camera<span class="syntax3">;</span> height<span class="syntax3">;</span> angle<span class="syntax3">;</span>   <span class="syntax1">END</span>
+<span class="syntax1">BEGIN</span>
+    set_mode<span class="syntax3">(</span><span class="syntax2">320200</span><span class="syntax3">);</span>
+    set_fps<span class="syntax3">(</span><span class="syntax2">60</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+
+    LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>  <span class="syntax5">// escenario</span>
+    LOAD_SKY9<span class="syntax3">(</span><span class="syntax4">&quot;MAP/SKY.MAP&quot;</span><span class="syntax3">);</span>                     <span class="syntax5">// cielo (opcional)</span>
+    MODE9_STEP<span class="syntax3">(</span><span class="syntax2">70</span><span class="syntax3">);</span>                              <span class="syntax5">// subir escalones</span>
+
+    MODE9_SET<span class="syntax3">(</span><span class="syntax2">70</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>                            <span class="syntax5">// altura del ojo, pitch</span>
+    START_MODE9<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>         <span class="syntax5">// ¡a renderizar!</span>
+
+    <span class="syntax1">LOOP</span>
+        <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_w<span class="syntax3">))</span> advance<span class="syntax3">(</span><span class="syntax2">20</span><span class="syntax3">);</span> <span class="syntax1">end</span>
+        <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_s<span class="syntax3">))</span> advance<span class="syntax3">(-</span><span class="syntax2">20</span><span class="syntax3">);</span> <span class="syntax1">end</span>
+        <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_left<span class="syntax3">))</span>  angle <span class="syntax3">+=</span> <span class="syntax2">4000</span><span class="syntax3">;</span> <span class="syntax1">end</span>
+        <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_right<span class="syntax3">))</span> angle <span class="syntax3">-=</span> <span class="syntax2">4000</span><span class="syntax3">;</span> <span class="syntax1">end</span>
+        <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_esc<span class="syntax3">))</span> <span class="syntax1">break</span><span class="syntax3">;</span> <span class="syntax1">end</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+    STOP_MODE9<span class="syntax3">();</span>
+<span class="syntax1">END</span>
+</pre>
+      </div>
+      <p>Ver: <a href="load_wld9.html">LOAD_WLD9()</a> &middot;
+      <a href="start_mode9.html">START_MODE9()</a> &middot;
+      <a href="mode9_set.html">MODE9_SET()</a> &middot;
+      <a href="mode9_step.html">MODE9_STEP()</a> &middot;
+      <a href="mode9_collision.html">MODE9_COLLISION()</a></p>
+    </div>
+
+    <div class="cat">
+      <h2>Etapa 2 &middot; Poblarlo con billboards (sprites 2D)</h2>
+      <p>Lo más rápido de meter en el mundo son los <strong>billboards</strong>:
+      dibujos 2D planos que siempre miran a la cámara y se escalan con la distancia, como en el
+      <strong>modo 7</strong>. Sirven para árboles, antorchas, objetos y hasta enemigos sencillos. La
+      forma más cómoda es la <strong>automática</strong>: das al proceso <strong>ctype = c_m9</strong>
+      y sus coordenadas de mundo en <strong>x, y, z</strong>, y el modo 9 lo dibuja solo cada frame
+      sin que llames a nada.</p>
+      <div class="ejemplo">
+        <div class="ejtitulo">
+          Un proceso billboard automático:
+        </div>
+<pre class="ejprograma">
+<span class="syntax5">// En el BEGIN principal, tras START_MODE9, carga el FPG y crea props:</span>
+load_fpg<span class="syntax3">(</span><span class="syntax4">&quot;FPG/MODE9.FPG&quot;</span><span class="syntax3">);</span>
+antorcha<span class="syntax3">(</span><span class="syntax2">300</span><span class="syntax3">,</span> <span class="syntax3">-</span><span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+antorcha<span class="syntax3">(-</span><span class="syntax2">300</span><span class="syntax3">,</span> <span class="syntax3">-</span><span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+<span class="syntax3">...</span>
+<span class="syntax1">PROCESS</span> antorcha<span class="syntax3">(</span>x<span class="syntax3">,</span> y<span class="syntax3">,</span> z<span class="syntax3">)</span>
+<span class="syntax1">BEGIN</span>
+    ctype <span class="syntax3">=</span> c_m9<span class="syntax3">;</span>          <span class="syntax5">// &lt;- lo marca como billboard del modo 9</span>
+    graph <span class="syntax3">=</span> <span class="syntax2">11</span><span class="syntax3">;</span>            <span class="syntax5">// dibujo de la antorcha en el FPG</span>
+    size  <span class="syntax3">=</span> <span class="syntax2">100</span><span class="syntax3">;</span>           <span class="syntax5">// tamaño base (la distancia hace el resto)</span>
+    <span class="syntax1">LOOP</span>
+        <span class="syntax5">// x, y, z son coordenadas de MUNDO; no toques nada más.</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+<span class="syntax1">END</span>
+</pre>
+      </div>
+      <p>Ver: <a href="mode9_billboard.html">MODE9_BILLBOARD()</a> &middot;
+      <a href="mode9_ctype.html">MODE9_CTYPE()</a> &middot;
+      <a href="mode9_occlude.html">MODE9_OCCLUDE()</a> &middot;
+      <a href="mode9_project.html">MODE9_PROJECT()</a></p>
+    </div>
+
+    <div class="cat">
+      <h2>Etapa 3 &middot; Meter objetos 3D de verdad</h2>
+      <p>Cuando un billboard plano no basta (quieres rodear al objeto y verlo
+      desde todos los lados), usa un <strong>modelo 3D</strong>. Se carga una vez con
+      <a href="load_obj9.html">LOAD_OBJ9()</a>, que devuelve un <strong>handle</strong>, y se dibuja
+      <strong>cada frame</strong> con <a href="draw_obj9.html">DRAW_OBJ9()</a> en la posición que
+      quieras. El mismo handle se puede dibujar varias veces para repetir el objeto.</p>
+      <div class="ejemplo">
+        <div class="ejtitulo">
+          Cargar y dibujar un modelo 3D:
+        </div>
+<pre class="ejprograma">
+<span class="syntax1">GLOBAL</span>
+    h_gato<span class="syntax3">;</span>
+<span class="syntax3">...</span>
+    h_gato <span class="syntax3">=</span> LOAD_OBJ9<span class="syntax3">(</span><span class="syntax4">&quot;OBJ/CAT.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CAT.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">50</span><span class="syntax3">);</span>
+    <span class="syntax1">LOOP</span>
+        <span class="syntax5">// se dibuja en (x, y, z) mirando a un angle dado, cada frame</span>
+        DRAW_OBJ9<span class="syntax3">(</span>h_gato<span class="syntax3">,</span> <span class="syntax2">400</span><span class="syntax3">,</span> <span class="syntax3">-</span><span class="syntax2">1300</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+        <span class="syntax5">// ... mover la cámara, etc.</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+</pre>
+      </div>
+      <div class="nota"><strong>Carga en segundo plano:</strong> LOAD_OBJ9 devuelve
+      el handle al instante pero el fichero tarda unos frames en estar listo. No pasa nada:
+      DRAW_OBJ9 ignora el modelo hasta que carga, así que aparece solo. Si quieres esperar, usa
+      <a href="mode9_obj9_ready.html">MODE9_OBJ9_READY()</a>.</div>
+      <p>Ver: <a href="load_obj9.html">LOAD_OBJ9()</a> &middot;
+      <a href="draw_obj9.html">DRAW_OBJ9()</a> &middot;
+      <a href="mode9_obj9_ready.html">MODE9_OBJ9_READY()</a></p>
+    </div>
+
+    <div class="cat">
+      <h2>Etapa 4 &middot; Animar un objeto 3D</h2>
+      <p>Para que el objeto se mueva (un gato que respira, un enemigo que anda),
+      cárgalo con <a href="load_obj9_anim.html">LOAD_OBJ9_ANIM()</a> en vez de LOAD_OBJ9. La animación
+      son varias <strong>poses</strong> guardadas como ficheros numerados (CAT0.OBJ, CAT1.OBJ...), y el
+      modo 9 mezcla las poses intermedias por ti para que se vea fluido. Se dibuja con
+      <a href="draw_obj9_anim.html">DRAW_OBJ9_ANIM()</a>, que lleva un parámetro de más,
+      <strong>fpos</strong>, que dice por qué punto de la animación va.</p>
+      <div class="ejemplo">
+        <div class="ejtitulo">
+          Cargar una animación y reproducirla en bucle:
+        </div>
+<pre class="ejprograma">
+<span class="syntax1">CONST</span>
+    NFRAMES <span class="syntax3">=</span> <span class="syntax2">10</span><span class="syntax3">;</span>      <span class="syntax5">// CAT0.OBJ .. CAT9.OBJ</span>
+    LOOP_CS <span class="syntax3">=</span> <span class="syntax2">300</span><span class="syntax3">;</span>     <span class="syntax5">// una vuelta dura 3 s (300 centesimas)</span>
+<span class="syntax1">GLOBAL</span>
+    h_gato<span class="syntax3">;</span>
+<span class="syntax3">...</span>
+    h_gato <span class="syntax3">=</span> LOAD_OBJ9_ANIM<span class="syntax3">(</span><span class="syntax4">&quot;OBJ/CAT&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CAT.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">50</span><span class="syntax3">,</span> NFRAMES<span class="syntax3">);</span>
+    <span class="syntax1">LOOP</span>
+        <span class="syntax5">// fpos atado al reloj: igual de rapido vaya el juego a los FPS que vaya</span>
+        DRAW_OBJ9_ANIM<span class="syntax3">(</span>h_gato<span class="syntax3">,</span> <span class="syntax2">400</span><span class="syntax3">,</span> <span class="syntax3">-</span><span class="syntax2">1300</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span>
+                       <span class="syntax3">(</span>timer<span class="syntax3">[</span><span class="syntax2">0</span><span class="syntax3">]</span> <span class="syntax3">%</span> LOOP_CS<span class="syntax3">)</span> <span class="syntax3">*</span> <span class="syntax3">(</span>NFRAMES<span class="syntax3">*</span><span class="syntax2">256</span><span class="syntax3">)</span> <span class="syntax3">/</span> LOOP_CS<span class="syntax3">);</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+</pre>
+      </div>
+      <p>Ver: <a href="load_obj9_anim.html">LOAD_OBJ9_ANIM()</a> &middot;
+      <a href="draw_obj9_anim.html">DRAW_OBJ9_ANIM()</a></p>
+    </div>
+
+    <div class="cat">
+      <h2>Etapa 5 &middot; Pasar de un mapa a otro</h2>
+      <p>Un nivel grande se parte en varios mapas y se va cargando el siguiente
+      al cruzar una puerta. La clave: <a href="load_wld9.html">LOAD_WLD9()</a> <strong>recarga el
+      escenario EN CALIENTE</strong>, sin parar el modo 9 ni perder la cámara. El truco para que no se
+      note el salto es un <strong>fundido a negro</strong> mientras se cambia la malla y se recoloca al
+      jugador.</p>
+      <div class="ejemplo">
+        <div class="ejtitulo">
+          Cruzar una puerta hacia el interior:
+        </div>
+<pre class="ejprograma">
+<span class="syntax5">// ¿El jugador está pegado a la puerta? (distancia al cuadrado &lt; radio²)</span>
+<span class="syntax1">if</span> <span class="syntax3">(</span><span class="syntax3">(</span>x<span class="syntax3">-</span>PUERTA_X<span class="syntax3">)*(</span>x<span class="syntax3">-</span>PUERTA_X<span class="syntax3">)</span> <span class="syntax3">+</span> <span class="syntax3">(</span>y<span class="syntax3">-</span>PUERTA_Y<span class="syntax3">)*(</span>y<span class="syntax3">-</span>PUERTA_Y<span class="syntax3">)</span> <span class="syntax3">&lt;</span> RADIO2<span class="syntax3">)</span>
+    fade_off<span class="syntax3">();</span> frame<span class="syntax3">;</span> fade_on<span class="syntax3">();</span> frame<span class="syntax3">;</span>   <span class="syntax5">// fundido a negro</span>
+
+    signal<span class="syntax3">(</span><span class="syntax1">type</span> props_patio<span class="syntax3">,</span> s_kill<span class="syntax3">);</span>     <span class="syntax5">// quitar lo del mapa viejo</span>
+
+    LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;OBJ/CASTIN.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTIN.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>  <span class="syntax5">// nuevo mapa</span>
+    SKY9_OFF<span class="syntax3">();</span>                              <span class="syntax5">// interior: sin cielo</span>
+    SET_ENV_COLOR9<span class="syntax3">(</span><span class="syntax2">8</span><span class="syntax3">,</span> <span class="syntax2">8</span><span class="syntax3">,</span> <span class="syntax2">12</span><span class="syntax3">);</span>           <span class="syntax5">// ambiente oscuro</span>
+
+    x <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span> y <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">300</span><span class="syntax3">;</span> angle <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">90000</span><span class="syntax3">;</span>   <span class="syntax5">// recolocar al jugador</span>
+<span class="syntax1">end</span>
+</pre>
+      </div>
+      <div class="nota"><strong>Cuidado con re-disparar la puerta:</strong> tras un
+      cambio, deja unos cuantos frames de margen (un "cooldown") antes de volver a comprobar puertas,
+      o entrarás y saldrás sin parar. Y como LOAD_WLD9 es bloqueante, ten a mano
+      <strong>ignore_error(142)</strong> por si salta el watchdog en hardware real.</div>
+      <p>Ver: <a href="load_wld9.html">LOAD_WLD9()</a> &middot;
+      <a href="sky9_off.html">SKY9_OFF()</a> &middot;
+      <a href="set_env_color9.html">SET_ENV_COLOR9()</a> &middot;
+      <a href="stop_mode9.html">STOP_MODE9()</a></p>
+    </div>
+
+    <hr />
+    <p>Y a partir de aquí, a pulir: niebla y distancia de visión
+    (<a href="set_fog9.html">SET_FOG9()</a>, <a href="mode9_farclip.html">MODE9_FARCLIP()</a>),
+    ángulo de cámara (<a href="mode9_fov.html">MODE9_FOV()</a>), pantalla partida para dos jugadores
+    (<a href="mode9_split.html">MODE9_SPLIT()</a>) o más velocidad en máquinas modestas
+    (<a href="mode9_downscale.html">MODE9_DOWNSCALE()</a>). Lo tienes todo en
+    <a href="funciones.html">Funciones</a>.</p>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_PERSPECTIVE()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_PERSPECTIVE()</h1>
+    <p><strong>MODE9_PERSPECTIVE( &lt;on&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Elige entre dibujar las texturas más rápido o más bonito. En suelos y paredes vistos muy de canto, la textura puede parecer que "ondula" o se tuerce un poco; eso es porque, para ir rápido, el motor hace los cálculos de forma aproximada. Activando esta opción los hace exactos y las texturas se ven perfectamente rectas, pero el dibujado cuesta más y el juego puede ir algo más lento.</p>
+    <p>Viene desactivada (modo rápido) porque en la mayoría de escenas la diferencia apenas se nota. Actívala solo si te molesta esa ondulación y tu ordenador va sobrado.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">on</td><td><strong>0</strong> = rápido, con una ligera ondulación en superficies muy inclinadas (por defecto); <strong>1</strong> = texturas perfectas, algo más lento.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+MODE9_PERSPECTIVE<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">);</span>   <span class="syntax5">// texturas sin ondulación (más lento)</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_downscale.html">MODE9_DOWNSCALE()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

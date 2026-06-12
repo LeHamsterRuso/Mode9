@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_UNITSCALE()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_UNITSCALE()</h1>
+    <p><strong>MODE9_UNITSCALE( &lt;unidades&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Decide cómo de grande se ve el escenario. Cuando modelas en un programa de 3D, una pared puede medir "2 unidades"; pero en DIV las distancias se miden en otra escala. Esta función establece la equivalencia: cuántas unidades de DIV vale cada unidad del modelo. Con 100 (el valor por defecto), 1 unidad del OBJ son 100 unidades de juego; si pones 200, todo el escenario será el doble de grande y tendrás que andar el doble para cruzarlo.</p>
+    <p>Normalmente no hace falta llamarla, porque ya indicas la escala en el tercer parámetro de <a href="load_wld9.html">LOAD_WLD9()</a>. Usala solo si quieres cambiarla por separado.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">unidades</td><td>Cuántas unidades de DIV equivalen a 1 unidad del modelo OBJ. 100 = valor por defecto; 200 = todo el doble de grande; 50 = todo a la mitad.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+MODE9_UNITSCALE<span class="syntax3">(</span><span class="syntax2">100</span><span class="syntax3">);</span>   <span class="syntax5">// 1 unidad de Blender = 100 uds DIV2</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="load_wld9.html">LOAD_WLD9()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

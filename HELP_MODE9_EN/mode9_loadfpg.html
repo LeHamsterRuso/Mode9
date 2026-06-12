@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_LOADFPG()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_LOADFPG()</h1>
+    <p><strong>MODE9_LOADFPG( &lt;FPG file&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Loads an FPG INSIDE the DLL so that the DLL itself draws billboards (processes with ctype <strong>c_m9</strong>) in EACH viewport. Required for sprites to display correctly in split-screen.</p>
+    <p>Without this call, billboards are drawn through DIV2's <strong>c_screen</strong> path, which only covers one view. Normally you load the same FPG already used by the game with <strong>load_fpg()</strong>.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">FPG file</td><td>.FPG file containing the billboard graphics. Must include the graphic codes that c_m9 processes will use.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> The number of graphics in the loaded FPG.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+load_fpg<span class="syntax3">(</span><span class="syntax4">&quot;FPG/MODE9.FPG&quot;</span><span class="syntax3">);</span>      <span class="syntax5">// game FPG (for DIV2)</span>
+MODE9_LOADFPG<span class="syntax3">(</span><span class="syntax4">&quot;FPG/MODE9.FPG&quot;</span><span class="syntax3">);</span> <span class="syntax5">// same FPG inside the DLL (for split-screen)</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_billboard.html">MODE9_BILLBOARD()</a> - <a href="mode9_ctype.html">MODE9_CTYPE()</a> - <a href="mode9_split.html">MODE9_SPLIT()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_COLLISION()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_COLLISION()</h1>
+    <p><strong>MODE9_COLLISION( &lt;on&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Enables or disables camera collision against walls. With collisions enabled, <strong>advance()</strong> and <strong>xadvance()</strong> do not pass through walls: the minimum distance to a wall is the camera process's <strong>radius</strong> field.</p>
+    <p>Collisions are <strong>enabled by default</strong>, so you only need to call this function with 0 if you want to DISABLE them (for example, a "noclip" mode).</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">on</td><td><strong>1</strong> = collisions active (does not pass through walls); <strong>0</strong> = no collisions (passes through walls).</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <div class="nota"><strong>Note:</strong> Stairs and ramps from <a href="mode9_step.html">MODE9_STEP()</a> only work when collisions are enabled.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+MODE9_COLLISION<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">);</span>   <span class="syntax5">// noclip mode: walk through walls</span>
+MODE9_COLLISION<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">);</span>   <span class="syntax5">// restore collisions (default state)</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_collide.html">MODE9_COLLIDE()</a> - <a href="mode9_step.html">MODE9_STEP()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

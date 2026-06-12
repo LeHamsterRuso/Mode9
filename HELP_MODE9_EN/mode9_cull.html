@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_CULL()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_CULL()</h1>
+    <p><strong>MODE9_CULL( &lt;mode&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Every face (polygon) of a model has a "front" and a "back". For speed, mode 9 does not draw faces that are turned away from the camera by default (faces you would not see anyway, like the back side of a wall). This is called <em>back-face culling</em>. This function lets you change that behaviour.</p>
+    <p>The default is fine for most scenes. You only need to touch it if walls "disappear" or appear transparent when you enter an area: that happens when the model's faces are flipped, and it is fixed with mode 0 or mode 2.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">mode</td><td><strong>0</strong> = draw all faces (whether visible or not — slower but nothing ever disappears); <strong>1</strong> = skip back faces (default, fastest); <strong>2</strong> = opposite of 1, useful for scenes modelled "inside-out", such as the interior of a room.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <div class="nota"><strong>Tip:</strong> If you enter a room and cannot see the walls from inside, try <strong>MODE9_CULL(0)</strong> (always works) or <strong>MODE9_CULL(2)</strong>.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+MODE9_CULL<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">);</span>   <span class="syntax5">// skip back faces (default, fastest)</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="load_wld9.html">LOAD_WLD9()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

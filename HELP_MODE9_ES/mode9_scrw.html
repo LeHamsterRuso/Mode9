@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_SCRW()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_SCRW()</h1>
+    <p><strong>MODE9_SCRW()</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Devuelve el ancho de la resolución de video activa, en píxeles. Útil para adaptar el ratón, los viewports y la interfaz a cualquier resolución, no solo a 320x200.</p>
+    <p>Se puede llamar en cualquier momento (no solo al inicio), por si cambias la resolución con <strong>set_mode()</strong> durante el juego.</p>
+    <p class="retorna"><strong>Retorna:</strong> El ancho en píxeles de la pantalla actual.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">GLOBAL</span>
+    scr_x<span class="syntax3">;</span> scr_y<span class="syntax3">;</span>
+<span class="syntax1">BEGIN</span>
+    set_mode<span class="syntax3">(</span><span class="syntax2">640480</span><span class="syntax3">);</span>
+    scr_x <span class="syntax3">=</span> MODE9_SCRW<span class="syntax3">();</span>   <span class="syntax5">// 640</span>
+    scr_y <span class="syntax3">=</span> MODE9_SCRH<span class="syntax3">();</span>   <span class="syntax5">// 480</span>
+    <span class="syntax5">// Centrar la mira en cualquier resolución</span>
+    write<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> scr_x<span class="syntax3">/</span><span class="syntax2">2</span><span class="syntax3">,</span> scr_y<span class="syntax3">/</span><span class="syntax2">2</span><span class="syntax3">,</span> <span class="syntax2">4</span><span class="syntax3">,</span> <span class="syntax4">&quot;+&quot;</span><span class="syntax3">);</span>
+<span class="syntax1">END</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_scrh.html">MODE9_SCRH()</a> - <a href="mode9_split.html">MODE9_SPLIT()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_OCCLUDE()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_OCCLUDE()</h1>
+    <p><strong>MODE9_OCCLUDE( &lt;on&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Decide si los sprites se esconden cuando hay una pared (u otra parte del escenario) delante de ellos. Con la opción activada (por defecto), un enemigo que está detrás de una columna queda oculto, como es natural. Si la desactivas, los sprites se dibujan siempre por encima de todo, aunque deberían estar tapados.</p>
+    <p>Desactivarla es útil para cosas que quieres ver SIEMPRE, como el icono de un objetivo o un marcador en el mapa, aunque haya paredes de por medio.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">on</td><td><strong>1</strong> = los sprites quedan tapados por el escenario, como es natural (por defecto); <strong>0</strong> = los sprites se ven siempre, por encima de todo.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+MODE9_OCCLUDE<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">);</span>   <span class="syntax5">// un enemigo tras una columna queda oculto (por defecto)</span>
+MODE9_OCCLUDE<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">);</span>   <span class="syntax5">// marcadores/iconos siempre visibles</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_billboard.html">MODE9_BILLBOARD()</a> - <a href="mode9_project.html">MODE9_PROJECT()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

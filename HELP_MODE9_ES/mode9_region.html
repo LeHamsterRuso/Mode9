@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_REGION()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_REGION()</h1>
+    <p><strong>MODE9_REGION( &lt;n&gt; , &lt;x&gt; , &lt;y&gt; , &lt;ancho&gt; , &lt;alto&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Define el rectangulo de la región <strong>n</strong> (1..15), igual que <strong>define_region()</strong> pero para el modo 9. Luego se usa como tercer parámetro de <a href="start_mode9.html">START_MODE9()</a> para dibujar el escenario solo en esa zona de la pantalla (varias regiones = pantalla partida, como las ventanas del modo 8).</p>
+    <p>La región <strong>0</strong> es siempre la pantalla completa. Un ancho o alto &lt;=0 borra la región.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">n</td><td>Número de región a definir (1..15).</td></tr>
+      <tr><td class="par">x, y</td><td>Esquina superior izquierda de la región, en píxeles.</td></tr>
+      <tr><td class="par">ancho, alto</td><td>Tamaño de la región en píxeles (&lt;=0 borra la región).</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 1 si define la región, 0 si falla.</p>
+    <div class="nota"><strong>Nota:</strong> Para split-screen de varias cámaras independientes suele ser más comodo <a href="mode9_split.html">MODE9_SPLIT()</a>.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Definir una vista en la mitad superior de la pantalla</span>
+MODE9_REGION<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">320</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+START_MODE9<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">1</span><span class="syntax3">);</span>   <span class="syntax5">// dibujar el 3D solo en la región 1</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="start_mode9.html">START_MODE9()</a> - <a href="mode9_split.html">MODE9_SPLIT()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

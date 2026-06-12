@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_SCRH()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_SCRH()</h1>
+    <p><strong>MODE9_SCRH()</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Returns the height of the active video resolution in pixels. It complements <a href="mode9_scrw.html">MODE9_SCRW()</a> for adapting the UI to the actual resolution.</p>
+    <p class="retorna"><strong>Returns:</strong> The height in pixels of the current screen.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+scr_y <span class="syntax3">=</span> MODE9_SCRH<span class="syntax3">();</span>
+<span class="syntax5">// Status bar at the bottom of the screen, regardless of resolution</span>
+write<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">4</span><span class="syntax3">,</span> scr_y <span class="syntax3">-</span> <span class="syntax2">10</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax4">&quot;HEALTH&quot;</span><span class="syntax3">);</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_scrw.html">MODE9_SCRW()</a> - <a href="mode9_split.html">MODE9_SPLIT()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

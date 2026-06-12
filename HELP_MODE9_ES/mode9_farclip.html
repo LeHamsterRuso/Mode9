@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_FARCLIP()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_FARCLIP()</h1>
+    <p><strong>MODE9_FARCLIP( &lt;distancia&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Define la distancia máxima de dibujado: no se dibuja geometría más allá de <strong>distancia</strong> unidades DIV2 (efecto "popping"). Afecta al escenario, a los modelos OBJ y a los billboards. Con <strong>0</strong> no hay límite (por defecto).</p>
+    <p>Si activas niebla con <a href="set_fog9.html">SET_FOG9()</a>, el far clip se activa automáticamente con el valor <strong>far</strong> de la niebla (lo que queda detrás de la niebla es del color de fondo y no se dibuja).</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">distancia</td><td>Distancia máxima de dibujado en unidades DIV2. 0 = sin límite.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+MODE9_FARCLIP<span class="syntax3">(</span><span class="syntax2">1000</span><span class="syntax3">);</span>   <span class="syntax5">// no dibujar nada más allá de 1000 uds</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="set_fog9.html">SET_FOG9()</a> - <a href="mode9_fog_off.html">MODE9_FOG_OFF()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

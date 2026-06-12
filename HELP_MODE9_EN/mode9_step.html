@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_STEP()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_STEP()</h1>
+    <p><strong>MODE9_STEP( &lt;height&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Defines the maximum height (DIV2 units) the player climbs automatically: stairs and ramps. Walls shorter than this value do not block movement (they are stepped over like a stair) and the camera rests on the floor beneath it. Setting <strong>0</strong> disables it.</p>
+    <p>The DLL only RAISES z when standing on a floor; GRAVITY (falling) is handled by the PRG by subtracting from z each frame.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">height</td><td>Maximum step/stair height that is climbed automatically, in DIV2 units. 0 = disabled.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <div class="nota"><strong>Note:</strong> Requires collisions to be enabled: does not work if you have called <a href="mode9_collision.html">MODE9_COLLISION(0)</a>.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+MODE9_STEP<span class="syntax3">(</span><span class="syntax2">70</span><span class="syntax3">);</span>   <span class="syntax5">// climb steps up to 70 units high</span>
+
+<span class="syntax5">// Gravity is applied by the PRG each frame:</span>
+fall_v <span class="syntax3">+=</span> <span class="syntax2">4</span><span class="syntax3">;</span>            <span class="syntax5">// accelerate the fall</span>
+m9<span class="syntax3">.</span>height <span class="syntax3">-=</span> fall_v<span class="syntax3">;</span>    <span class="syntax5">// descend</span>
+<span class="syntax1">if</span> <span class="syntax3">(</span>m9<span class="syntax3">.</span>height <span class="syntax3">&lt;</span> <span class="syntax2">70</span><span class="syntax3">)</span>     <span class="syntax5">// clamp when hitting the floor</span>
+    m9<span class="syntax3">.</span>height <span class="syntax3">=</span> <span class="syntax2">70</span><span class="syntax3">;</span> fall_v <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span>
+<span class="syntax1">end</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_collision.html">MODE9_COLLISION()</a> - <a href="mode9_collide.html">MODE9_COLLIDE()</a> - <a href="mode9_set.html">MODE9_SET()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

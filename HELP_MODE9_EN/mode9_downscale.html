@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_DOWNSCALE()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_DOWNSCALE()</h1>
+    <p><strong>MODE9_DOWNSCALE( &lt;n&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>A speed trick at the cost of a little image quality: draws the 3D at a lower resolution and then stretches the result by repeating lines. The image looks "chunkier" (more pixellated), but the engine has far fewer pixels to fill, so it runs smoother. Useful if the game runs slowly on a modest machine.</p>
+    <p>The gain depends on how many pixels the engine has to fill: in large, heavily textured scenes, value 2 can almost double the FPS; in sparse scenes the difference is barely noticeable.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">n</td><td><strong>1</strong> = native resolution (default); <strong>2</strong> = 1 in every 2 lines (~2x fill rate); <strong>3</strong> = 1 in every 3 (~3x); <strong>4</strong> = 1 in every 4 (~4x, very chunky pixel-art look).</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+MODE9_DOWNSCALE<span class="syntax3">(</span><span class="syntax2">2</span><span class="syntax3">);</span>   <span class="syntax5">// half render: double fill-rate speed</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_perspective.html">MODE9_PERSPECTIVE()</a> - <a href="mode9_farclip.html">MODE9_FARCLIP()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

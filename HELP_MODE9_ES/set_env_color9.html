@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - SET_ENV_COLOR9()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>SET_ENV_COLOR9()</h1>
+    <p><strong>SET_ENV_COLOR9( &lt;r&gt; , &lt;g&gt; , &lt;b&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Elige el color del fondo, es decir, lo que se ve por detrás del escenario donde no hay ni paredes ni suelo (el "cielo" liso, si no has puesto un cielo con dibujo). Ese mismo color es ademas el de la niebla, así que con el decides el ambiente general de la escena: un azul claro para un dia despejado, un gris para un dia nublado, un tono oscuro para un interior o una noche.</p>
+    <p>Cada color se da con sus tres componentes rojo, verde y azul, de <strong>0 a 100</strong>: 0 es nada de ese color y 100 el máximo (así, 0,0,0 es negro y 100,100,100 es blanco).</p>
+    <p>Si tienes puesto un cielo con dibujo (<a href="load_sky9.html">LOAD_SKY9()</a>), ese cielo tapa el color de fondo, pero el color sigue usandose para la niebla.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">r</td><td>Componente rojo del color de fondo/niebla, 0..100.</td></tr>
+      <tr><td class="par">g</td><td>Componente verde, 0..100.</td></tr>
+      <tr><td class="par">b</td><td>Componente azul, 0..100.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+SET_ENV_COLOR9<span class="syntax3">(</span><span class="syntax2">30</span><span class="syntax3">,</span> <span class="syntax2">35</span><span class="syntax3">,</span> <span class="syntax2">50</span><span class="syntax3">);</span>   <span class="syntax5">// cielo crepuscular azulado</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="set_fog9.html">SET_FOG9()</a> - <a href="load_sky9.html">LOAD_SKY9()</a> - <a href="sky9_off.html">SKY9_OFF()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

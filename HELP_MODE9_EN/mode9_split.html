@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_SPLIT()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_SPLIT()</h1>
+    <p><strong>MODE9_SPLIT( &lt;slot&gt; , &lt;camera&gt; , &lt;OFFSET m9.z&gt; , &lt;x&gt; , &lt;y&gt; , &lt;width&gt; , &lt;height&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Defines a viewport for SPLIT-SCREEN: up to 4 simultaneous cameras, each with its own <strong>m9</strong> structure and its own rectangle on screen. Each slot is an independent view with its own camera.</p>
+    <p>For billboards to appear in all views, the FPG must be loaded into the DLL with <a href="mode9_loadfpg.html">MODE9_LOADFPG()</a>.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">slot</td><td>Viewport number (0..3).</td></tr>
+      <tr><td class="par">camera</td><td>Id of the camera process for this view.</td></tr>
+      <tr><td class="par">OFFSET m9.z</td><td>Address of this camera's m9 structure (each view has its own).</td></tr>
+      <tr><td class="par">x, y</td><td>Top-left corner of the viewport, in pixels.</td></tr>
+      <tr><td class="par">width, height</td><td>Size of the viewport in pixels.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 1.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Two players, horizontal split-screen (320x200)</span>
+MODE9_LOADFPG<span class="syntax3">(</span><span class="syntax4">&quot;FPG/MODE9.FPG&quot;</span><span class="syntax3">);</span>
+MODE9_SPLIT<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> jug1<span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9a<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span>   <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">320</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>  <span class="syntax5">// top</span>
+MODE9_SPLIT<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">,</span> jug2<span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9b<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">,</span> <span class="syntax2">320</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>  <span class="syntax5">// bottom</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_region.html">MODE9_REGION()</a> - <a href="mode9_loadfpg.html">MODE9_LOADFPG()</a> - <a href="start_mode9.html">START_MODE9()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

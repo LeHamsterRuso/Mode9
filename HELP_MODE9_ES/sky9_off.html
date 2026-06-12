@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - SKY9_OFF()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>SKY9_OFF()</h1>
+    <p><strong>SKY9_OFF()</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Desactiva el cielo panoramico y vuelve al fondo de color plano definido por <a href="set_env_color9.html">SET_ENV_COLOR9()</a>. Útil al cambiar de un exterior (con cielo) a un interior (sin cielo).</p>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Al entrar en el interior del castillo: quitar el cielo y oscurecer el fondo</span>
+LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTIN.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTIN.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+SKY9_OFF<span class="syntax3">();</span>
+SET_ENV_COLOR9<span class="syntax3">(</span><span class="syntax2">8</span><span class="syntax3">,</span> <span class="syntax2">8</span><span class="syntax3">,</span> <span class="syntax2">12</span><span class="syntax3">);</span>   <span class="syntax5">// ambiente oscuro de interior</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="load_sky9.html">LOAD_SKY9()</a> - <a href="set_env_color9.html">SET_ENV_COLOR9()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

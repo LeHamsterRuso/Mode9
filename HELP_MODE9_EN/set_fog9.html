@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - SET_FOG9()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>SET_FOG9()</h1>
+    <p><strong>SET_FOG9( &lt;near&gt; , &lt;far&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Activates <strong>fog</strong>: distant geometry gradually fades into a colour, just like real mist. It adds a sense of depth and also hides the edge of the scene (instead of objects popping in abruptly, they blend in gradually). It is the same idea as mode 8's <strong>set_fog</strong>.</p>
+    <p>The fog COLOUR is the one set with <a href="set_env_color9.html">SET_ENV_COLOR9()</a>. Geometry blends with that colour progressively: it looks sharp up to the <strong>near</strong> distance and is completely tinted (hidden) from <strong>far</strong> onwards.</p>
+    <p>Enabling fog automatically activates the far clip at the <strong>far</strong> value: anything beyond it is not drawn (it is already the background colour).</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">near</td><td>Distance (DIV2 units) up to which there is NO fog (fully sharp).</td></tr>
+      <tr><td class="par">far</td><td>Distance (DIV2 units) at which fog is total (everything becomes the background colour).</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+SET_ENV_COLOR9<span class="syntax3">(</span><span class="syntax2">20</span><span class="syntax3">,</span> <span class="syntax2">20</span><span class="syntax3">,</span> <span class="syntax2">28</span><span class="syntax3">);</span>   <span class="syntax5">// fog colour</span>
+SET_FOG9<span class="syntax3">(</span><span class="syntax2">300</span><span class="syntax3">,</span> <span class="syntax2">1200</span><span class="syntax3">);</span>          <span class="syntax5">// sharp up to 300, opaque at 1200</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_fog_off.html">MODE9_FOG_OFF()</a> - <a href="set_env_color9.html">SET_ENV_COLOR9()</a> - <a href="mode9_farclip.html">MODE9_FARCLIP()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

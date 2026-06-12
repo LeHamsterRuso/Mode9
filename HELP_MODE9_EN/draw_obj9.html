@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - DRAW_OBJ9()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>DRAW_OBJ9()</h1>
+    <p><strong>DRAW_OBJ9( &lt;handle&gt; , &lt;x&gt; , &lt;y&gt; , &lt;z&gt; , &lt;angle&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Queues an instance of model <strong>handle</strong> (returned by <a href="load_obj9.html">LOAD_OBJ9()</a>) at world position (x, y, z) in DIV2 units, with the given orientation. Must be called EVERY FRAME, before FRAME, for each instance you want to see.</p>
+    <p>The queue is cleared automatically after all views have been rendered, so the same model can be drawn many times at different positions in the same frame.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">handle</td><td>Model handle returned by LOAD_OBJ9.</td></tr>
+      <tr><td class="par">x, y, z</td><td>World position in DIV2 units (x, y on the ground; z = height).</td></tr>
+      <tr><td class="par">angle</td><td>Orientation in thousandths of a degree (DIV2 convention; 180000 = 180 degrees).</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <div class="nota"><strong>Note:</strong> While the model is still loading in the background, DRAW_OBJ9 silently ignores it: the object appears automatically when loading completes.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Draw three knights in a row, facing south</span>
+DRAW_OBJ9<span class="syntax3">(</span>h_npc<span class="syntax3">,</span> <span class="syntax3">-</span><span class="syntax2">200</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+DRAW_OBJ9<span class="syntax3">(</span>h_npc<span class="syntax3">,</span>    <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+DRAW_OBJ9<span class="syntax3">(</span>h_npc<span class="syntax3">,</span>  <span class="syntax2">200</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="load_obj9.html">LOAD_OBJ9()</a> - <a href="draw_obj9_anim.html">DRAW_OBJ9_ANIM()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

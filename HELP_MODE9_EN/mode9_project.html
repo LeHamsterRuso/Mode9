@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_PROJECT()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_PROJECT()</h1>
+    <p><strong>MODE9_PROJECT( &lt;wx&gt; , &lt;wy&gt; , &lt;wz&gt; , &lt;OFFSET sx&gt; , &lt;OFFSET sy&gt; , &lt;OFFSET sz&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Answers the question: "where on screen does this 3D world point appear?". You give it a world position (wx, wy, wz) and it returns the screen coordinates (sx, sy) where it would be seen, plus its depth (sz, how far away it is). It is like <a href="mode9_billboard.html">MODE9_BILLBOARD()</a>, but instead of moving a process it hands you the numbers so you can do whatever you want with them.</p>
+    <p>This is exactly what you need to anchor 2D information to a world object: an NPC's name floating above their head, a speech bubble, an arrow pointing to a target, or a health bar. It returns <strong>0</strong> if the point is behind the camera (in which case nothing should be drawn).</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">wx, wy, wz</td><td>World point to project (DIV2 units).</td></tr>
+      <tr><td class="par">OFFSET sx</td><td>Variable that receives the screen X coordinate (pass <strong>OFFSET sx</strong>).</td></tr>
+      <tr><td class="par">OFFSET sy</td><td>Variable that receives the screen Y coordinate.</td></tr>
+      <tr><td class="par">OFFSET sz</td><td>Variable that receives the depth (z) of the point.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 1 if the point is visible, 0 if it is hidden.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">PRIVATE</span>
+    nsx<span class="syntax3">;</span> nsy<span class="syntax3">;</span> nsz<span class="syntax3">;</span>
+<span class="syntax1">END</span>
+    <span class="syntax5">// Anchor the NPC name above their head</span>
+    <span class="syntax1">if</span> <span class="syntax3">(</span>MODE9_PROJECT<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">220</span><span class="syntax3">,</span> <span class="syntax1">OFFSET</span> nsx<span class="syntax3">,</span> <span class="syntax1">OFFSET</span> nsy<span class="syntax3">,</span> <span class="syntax1">OFFSET</span> nsz<span class="syntax3">))</span>
+        <span class="syntax5">// visible on screen: draw the label at (nsx, nsy)</span>
+        write<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> nsx<span class="syntax3">,</span> nsy<span class="syntax3">,</span> <span class="syntax2">4</span><span class="syntax3">,</span> <span class="syntax4">&quot;Nazuma&quot;</span><span class="syntax3">);</span>
+    <span class="syntax1">end</span>
+</pre>
+    </div>
+    <p>Because it writes to variables rather than moving a process, it is ideal for world-anchored HUD elements (NPC labels, speech bubbles, objective icons).</p>
+    <hr />
+    See: <a href="mode9_billboard.html">MODE9_BILLBOARD()</a> - <a href="mode9_occlude.html">MODE9_OCCLUDE()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

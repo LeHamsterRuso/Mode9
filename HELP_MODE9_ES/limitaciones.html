@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - Limitaciones</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>Limitaciones de la librería</h1>
+    <p>El modo 9 es un motor pensado para funcionar en máquinas modestas, así que
+    tiene unos límites fijos en la cantidad de geometría, texturas y objetos que puede manejar a
+    la vez. Conviene conocerlos para diseñar los niveles sin sorpresas. Si te pasas de alguno, lo
+    que sobra simplemente no se dibuja o no se carga.</p>
+    <div class="cat">
+      <h2>Escenario (LOAD_WLD9)</h2>
+      <table class="params">
+        <tr><th>Recurso</th><th>Máximo</th><th>Notas</th></tr>
+        <tr><td class="par">Vértices</td><td>4096</td><td>Puntos de la malla del escenario.</td></tr>
+        <tr><td class="par">Triángulos (caras)</td><td>8192</td>
+            <td>El total de caras del escenario. Aunque caben 8192, cuantas menos, más fluido va.</td></tr>
+        <tr><td class="par">Materiales</td><td>16</td><td>Texturas distintas por escenario (usemtl 0..15).</td></tr>
+        <tr><td class="par">Textura por material</td><td>1024 x 1024 px</td><td>Ficheros .MAP de DIV.</td></tr>
+        <tr><td class="par">Paredes de colisión</td><td>4096</td>
+            <td>Caras verticales que frenan al jugador. Es un subconjunto de los triángulos.</td></tr>
+        <tr><td class="par">Suelos de colisión</td><td>4096</td>
+            <td>Caras casi horizontales que sostienen al jugador (rampas y escalones).</td></tr>
+      </table>
+    </div>
+    <div class="cat">
+      <h2>Modelos de objeto (LOAD_OBJ9 / LOAD_OBJ9_ANIM)</h2>
+      <table class="params">
+        <tr><th>Recurso</th><th>Máximo</th><th>Notas</th></tr>
+        <tr><td class="par">Modelos distintos a la vez</td><td>8</td>
+            <td>Modelos cargados simultáneamente. Una animación completa, con todas sus poses,
+            ocupa 1 solo slot (no 1 por pose).</td></tr>
+        <tr><td class="par">Instancias por fotograma</td><td>32</td>
+            <td>Cuántas veces puedes dibujar modelos con <a href="draw_obj9.html">DRAW_OBJ9()</a>
+            o <a href="draw_obj9_anim.html">DRAW_OBJ9_ANIM()</a> en un mismo frame (sumando todos
+            los modelos).</td></tr>
+        <tr><td class="par">Vértices por modelo</td><td>512</td>
+            <td>Por pose. En una animación, todas las poses comparten ese mismo tope (tienen el
+            mismo número de vértices).</td></tr>
+        <tr><td class="par">Triángulos por modelo</td><td>1024</td><td>&nbsp;</td></tr>
+        <tr><td class="par">Poses por animación (nframes)</td><td>sin tope fijo</td>
+            <td>No hay un máximo grabado en la DLL: lo limitan la memoria y el nombre del fichero.
+            Cada pose guarda solo las posiciones de sus vértices (512 &times; 12 bytes &asymp; 6 KB
+            por pose), así que aun una animación larga ocupa poco.</td></tr>
+      </table>
+    </div>
+    <div class="nota"><strong>Sobre el número de poses de una animación:</strong> al numerarse los
+    ficheros (CAT0.OBJ, CAT1.OBJ...), el nombre sigue atado al límite de DOS de 8 caracteres. Con un
+    <strong>base</strong> de 6 letras solo te caben 2 dígitos (hasta 99 poses); con uno corto como
+    "CAT" llegas a miles. En la práctica nunca hacen falta tantas: el modo 9 mezcla las poses
+    intermedias por ti, y con 8&ndash;12 poses ya sale un ciclo muy fluido (ver
+    <a href="draw_obj9_anim.html">DRAW_OBJ9_ANIM()</a>).</div>
+    <div class="cat">
+      <h2>Sprites, cámaras y cielo</h2>
+      <table class="params">
+        <tr><th>Recurso</th><th>Máximo</th><th>Notas</th></tr>
+        <tr><td class="par">Billboards (c_m9) simultáneos</td><td>256</td>
+            <td>Sprites planos en el mundo. Tienen mucho más margen que los modelos 3D.</td></tr>
+        <tr><td class="par">Viewports (pantalla partida)</td><td>4</td>
+            <td>Cámaras a la vez con <a href="mode9_split.html">MODE9_SPLIT()</a>.</td></tr>
+        <tr><td class="par">Regiones</td><td>16</td>
+            <td>Zonas de pantalla con <a href="mode9_region.html">MODE9_REGION()</a>.</td></tr>
+        <tr><td class="par">Cielo panoramico</td><td>4096 x 2048 px</td>
+            <td>Textura .MAP del cielo (<a href="load_sky9.html">LOAD_SKY9()</a>).</td></tr>
+      </table>
+    </div>
+    <div class="cat">
+      <h2>Consejos para sortear los límites</h2>
+      <p><strong>Demasiados polígonos en el escenario:</strong> deja que las
+      texturas pongan el detalle en vez de la geometría (una pared de ladrillos es un cuadrado con
+      una buena textura, no mil ladrillos modelados). Y si un nivel es enorme, partelo en varios
+      mapas más pequeños y ve cargando el siguiente con
+      <a href="load_wld9.html">LOAD_WLD9()</a> cuando el jugador cambia de zona: como la carga es
+      en caliente, da sensación de mundo continuo.</p>
+      <p><strong>Más de 16 materiales:</strong> junta varias texturas pequeñas en un solo .MAP de
+      1024x1024 (un "atlas") y usa las UVs para que cada cara coja su trozo. Así un solo material
+      hace el trabajo de muchos.</p>
+      <p><strong>Más de 8 modelos 3D o de 32 instancias por frame:</strong> reserva los modelos 3D
+      para lo importante (el protagonista, los enemigos cercanos) y haz el resto con
+      <strong>billboards</strong>, que admiten hasta 256. Un mismo modelo también puede repetirse
+      con texturas distintas para dar variedad sin gastar más slots.</p>
+      <p><strong>Modelos demasiado densos:</strong> simplifica la malla antes de exportar (en
+      Blender, el modificador <em>Decimate</em>). El motor es de baja resolución y un modelo muy
+      detallado no luce más, solo va más lento.</p>
+      <p><strong>Si el juego va lento:</strong> no es un límite duro, pero ayuda recortar la
+      distancia de visión con <a href="set_fog9.html">SET_FOG9()</a> o
+      <a href="mode9_farclip.html">MODE9_FARCLIP()</a> y bajar la resolución de dibujado con
+      <a href="mode9_downscale.html">MODE9_DOWNSCALE()</a>.</p>
+    </div>
+    <div class="nota"><strong>Nota para programadores:</strong> estos límites
+    están fijados en el código de <strong>MODE9.DLL</strong> (constantes <strong>MAX_TRIS</strong>,
+    <strong>MAX_OBJ9_MODELS</strong>, etc.). Quien compile la DLL puede subirlos, a cambio de más
+    consumo de memoria.</div>
+    <hr />
+    Ver: <a href="modelos.html">Modelos OBJ</a> - <a href="load_wld9.html">LOAD_WLD9()</a> - <a href="load_obj9.html">LOAD_OBJ9()</a> - <a href="mode9_downscale.html">MODE9_DOWNSCALE()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_CULL()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_CULL()</h1>
+    <p><strong>MODE9_CULL( &lt;modo&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Cada cara (polígono) de un modelo tiene un "derecho" y un "revés". Para ir más rápido, el modo 9 no dibuja por defecto las caras que están de espaldas a la cámara (las que no podrías ver de todas formas, como la cara trasera de una pared). A eso se le llama <em>descartar caras traseras</em>. Esta función te deja cambiar ese comportamiento.</p>
+    <p>Lo normal es dejarlo como está. Solo necesitarás tocarlo si al entrar en un sitio las paredes "desaparecen" o se ven transparentes: eso pasa cuando el modelo tiene las caras del revés, y se arregla con el modo 0 o el 2.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">modo</td><td><strong>0</strong> = dibujar todas las caras (las veas o no, más lento pero nunca desaparece nada); <strong>1</strong> = no dibujar las traseras (por defecto, lo más rápido); <strong>2</strong> = al revés que el 1, útil para escenarios modelados "del derecho hacia dentro", como el interior de una habitación.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <div class="nota"><strong>Nota:</strong> Truco: si entras en una sala y no ves las paredes desde dentro, prueba <strong>MODE9_CULL(0)</strong> (siempre funciona) o <strong>MODE9_CULL(2)</strong>.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+MODE9_CULL<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">);</span>   <span class="syntax5">// descartar caras traseras (por defecto, más rápido)</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="load_wld9.html">LOAD_WLD9()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

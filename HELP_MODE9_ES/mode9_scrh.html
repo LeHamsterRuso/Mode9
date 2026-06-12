@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_SCRH()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_SCRH()</h1>
+    <p><strong>MODE9_SCRH()</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Devuelve el alto de la resolución de video activa, en píxeles. Es el complemento de <a href="mode9_scrw.html">MODE9_SCRW()</a> para adaptar la interfaz a la resolución real.</p>
+    <p class="retorna"><strong>Retorna:</strong> El alto en píxeles de la pantalla actual.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+scr_y <span class="syntax3">=</span> MODE9_SCRH<span class="syntax3">();</span>
+<span class="syntax5">// Barra de estado en la parte baja de la pantalla, sea cual sea la resolución</span>
+write<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">4</span><span class="syntax3">,</span> scr_y <span class="syntax3">-</span> <span class="syntax2">10</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax4">&quot;VIDA&quot;</span><span class="syntax3">);</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_scrw.html">MODE9_SCRW()</a> - <a href="mode9_split.html">MODE9_SPLIT()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_LOADFPG()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_LOADFPG()</h1>
+    <p><strong>MODE9_LOADFPG( &lt;fichero FPG&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Carga un FPG DENTRO de la DLL para que sea ella misma quien dibuje los billboards (procesos con ctype <strong>c_m9</strong>) en CADA viewport. Es necesario para que los sprites se vean correctamente en pantalla partida (split-screen).</p>
+    <p>Sin esta llamada, los billboards se dibujan por la ruta <strong>c_screen</strong> de DIV2, que solo cubre una vista. Normalmente se carga el mismo FPG que ya usa el juego con <strong>load_fpg()</strong>.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">fichero FPG</td><td>Fichero .FPG con los gráficos de los billboards. Debe contener los códigos de gráfico que usaran los procesos c_m9.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> El número de gráficos del FPG cargado.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+load_fpg<span class="syntax3">(</span><span class="syntax4">&quot;FPG/MODE9.FPG&quot;</span><span class="syntax3">);</span>      <span class="syntax5">// FPG del juego (para DIV2)</span>
+MODE9_LOADFPG<span class="syntax3">(</span><span class="syntax4">&quot;FPG/MODE9.FPG&quot;</span><span class="syntax3">);</span> <span class="syntax5">// el mismo FPG dentro de la DLL (para split-screen)</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_billboard.html">MODE9_BILLBOARD()</a> - <a href="mode9_ctype.html">MODE9_CTYPE()</a> - <a href="mode9_split.html">MODE9_SPLIT()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

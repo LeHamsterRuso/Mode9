@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_FOV()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_FOV()</h1>
+    <p><strong>MODE9_FOV( &lt;degrees&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Adjusts the "viewing angle": how much of the world the camera captures from side to side, like the zoom on a photo camera. This is what 3D games call <strong>FOV</strong> (<em>field of view</em>). The default value (about 71 degrees) gives a natural, balanced view.</p>
+    <p>Lowering the angle (e.g. 60) is like zooming in: you see less to the sides but everything looks "closer". Raising it (90 or 110) gives a wide-angle effect: you see much more around you with a greater sense of speed, though objects at the edges look slightly stretched.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">degrees</td><td>Horizontal field of view: 60 = narrow (zoom), 71 = natural (default), 90 = wide, 110 = very wide (wide-angle).</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+MODE9_FOV<span class="syntax3">(</span><span class="syntax2">90</span><span class="syntax3">);</span>   <span class="syntax5">// wide-angle view</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_set.html">MODE9_SET()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

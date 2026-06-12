@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_SPLIT()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_SPLIT()</h1>
+    <p><strong>MODE9_SPLIT( &lt;slot&gt; , &lt;cámara&gt; , &lt;OFFSET m9.z&gt; , &lt;x&gt; , &lt;y&gt; , &lt;ancho&gt; , &lt;alto&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Define un viewport para PANTALLA PARTIDA (split-screen): hasta 4 cámaras simultáneas, cada una con su propia estructura <strong>m9</strong> y su propio rectangulo en pantalla. Cada slot es una vista independiente con su cámara.</p>
+    <p>Para que los billboards se vean en todas las vistas hay que cargar el FPG en la DLL con <a href="mode9_loadfpg.html">MODE9_LOADFPG()</a>.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">slot</td><td>Número de viewport (0..3).</td></tr>
+      <tr><td class="par">cámara</td><td>Id del proceso cámara de esta vista.</td></tr>
+      <tr><td class="par">OFFSET m9.z</td><td>Dirección de la estructura m9 de esta cámara (cada vista la suya).</td></tr>
+      <tr><td class="par">x, y</td><td>Esquina superior izquierda del viewport, en píxeles.</td></tr>
+      <tr><td class="par">ancho, alto</td><td>Tamaño del viewport en píxeles.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 1.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Dos jugadores, pantalla partida horizontal (320x200)</span>
+MODE9_LOADFPG<span class="syntax3">(</span><span class="syntax4">&quot;FPG/MODE9.FPG&quot;</span><span class="syntax3">);</span>
+MODE9_SPLIT<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> jug1<span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9a<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span>   <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">320</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>  <span class="syntax5">// arriba</span>
+MODE9_SPLIT<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">,</span> jug2<span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9b<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">,</span> <span class="syntax2">320</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>  <span class="syntax5">// abajo</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_region.html">MODE9_REGION()</a> - <a href="mode9_loadfpg.html">MODE9_LOADFPG()</a> - <a href="start_mode9.html">START_MODE9()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

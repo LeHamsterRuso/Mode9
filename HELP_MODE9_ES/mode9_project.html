@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_PROJECT()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_PROJECT()</h1>
+    <p><strong>MODE9_PROJECT( &lt;wx&gt; , &lt;wy&gt; , &lt;wz&gt; , &lt;OFFSET sx&gt; , &lt;OFFSET sy&gt; , &lt;OFFSET sz&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Responde a la pregunta: "este punto del mundo 3D, ¿en qué parte de la pantalla cae?". Le das una posición del mundo (wx, wy, wz) y te devuelve las coordenadas de pantalla (sx, sy) donde se veria, más su profundidad (sz, lo lejos que esta). Es como <a href="mode9_billboard.html">MODE9_BILLBOARD()</a>, pero en vez de mover un proceso te entrega los números para que hagas tu lo que quieras con ellos.</p>
+    <p>Es justo lo que necesitas para pegar información 2D a un objeto del mundo: el nombre de un personaje flotando sobre su cabeza, un bocadillo de diálogo, una flecha que señala un objetivo o una barra de vida. Devuelve <strong>0</strong> si el punto queda detrás de la cámara (entonces no hay que dibujar nada).</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">wx, wy, wz</td><td>Punto del MUNDO a proyectar (uds DIV2).</td></tr>
+      <tr><td class="par">OFFSET sx</td><td>Variable donde se escribe la X en pantalla (pasar <strong>OFFSET sx</strong>).</td></tr>
+      <tr><td class="par">OFFSET sy</td><td>Variable donde se escribe la Y en pantalla.</td></tr>
+      <tr><td class="par">OFFSET sz</td><td>Variable donde se escribe la profundidad (z) del punto.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 1 si el punto es visible, 0 si está oculto.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">PRIVATE</span>
+    nsx<span class="syntax3">;</span> nsy<span class="syntax3">;</span> nsz<span class="syntax3">;</span>
+<span class="syntax1">END</span>
+    <span class="syntax5">// Anclar el nombre del NPC sobre su cabeza</span>
+    <span class="syntax1">if</span> <span class="syntax3">(</span>MODE9_PROJECT<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">220</span><span class="syntax3">,</span> <span class="syntax1">OFFSET</span> nsx<span class="syntax3">,</span> <span class="syntax1">OFFSET</span> nsy<span class="syntax3">,</span> <span class="syntax1">OFFSET</span> nsz<span class="syntax3">))</span>
+        <span class="syntax5">// visible en pantalla: dibujar el rotulo en (nsx, nsy)</span>
+        write<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> nsx<span class="syntax3">,</span> nsy<span class="syntax3">,</span> <span class="syntax2">4</span><span class="syntax3">,</span> <span class="syntax4">&quot;Nazuma&quot;</span><span class="syntax3">);</span>
+    <span class="syntax1">end</span>
+</pre>
+    </div>
+    <p>Como escribe en variables en lugar de mover un proceso, es ideal para HUD anclado al mundo (rotulos de NPC, bocadillos de diálogo, iconos de objetivo).</p>
+    <hr />
+    Ver: <a href="mode9_billboard.html">MODE9_BILLBOARD()</a> - <a href="mode9_occlude.html">MODE9_OCCLUDE()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

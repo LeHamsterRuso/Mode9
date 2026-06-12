@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_BILLBOARD()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_BILLBOARD()</h1>
+    <p><strong>MODE9_BILLBOARD( &lt;id&gt; , &lt;wx&gt; , &lt;wy&gt; , &lt;wz&gt; , &lt;tamaño base&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Coloca un proceso dentro del mundo 3D como si fuera una figura de cartón recortada: un dibujo plano que siempre mira a la cámara y que se ve más grande o más pequeño según lo cerca o lejos que esté. A eso se le llama un <strong>billboard</strong>, y es la forma clásica (la del <strong>modo 7</strong>) de meter personajes, enemigos, árboles o antorchas en un escenario tridimensional sin tener que modelarlos en 3D.</p>
+    <p>Tú le dices en qué punto del mundo va (wx, wy, wz) y la función se encarga de calcular en qué parte de la pantalla cae y de qué tamaño se tiene que ver, escribiendolo en los campos del proceso. Devuelve <strong>1</strong> si el sprite queda a la vista y <strong>0</strong> si no se ve (porque está detrás de la cámara o tapado por una pared).</p>
+    <p><strong>Sprites con varias vistas:</strong> igual que en el modo 7, puedes hacer que un personaje se vea distinto según desde donde lo mires (de frente, de espaldas, de perfil...). Para ello el proceso debe tener una tabla de gráficos en su campo <strong>xgraph</strong> y su orientación en <strong>angle</strong>; el modo 9 elige automáticamente el dibujo adecuado según el ángulo desde el que la cámara lo observa.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">id</td><td>El proceso que quieres mostrar como sprite en el mundo 3D.</td></tr>
+      <tr><td class="par">wx, wy, wz</td><td>Donde colocarlo dentro del mundo (wx, wy sobre el suelo; wz = altura), en unidades de juego.</td></tr>
+      <tr><td class="par">tamaño base</td><td>El tamaño del sprite cuando está a distancia normal (igual que el campo <strong>size</strong>). El modo 9 lo agranda o lo encoge según la distancia.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 1 si el sprite es visible, 0 si está oculto (detrás de la cámara o tapado).</p>
+    <div class="nota"><strong>Nota:</strong> Para sprites que no se mueven (una antorcha, un árbol) hay una forma más cómoda y automática: basta con poner <strong>ctype = c_m9</strong> en el proceso y dejar sus coordenadas en el mundo; el modo 9 lo dibuja solo cada fotograma, sin que tengas que llamar a nada (ver <a href="mode9_ctype.html">MODE9_CTYPE()</a>).</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">PROCESS</span> antorcha<span class="syntax3">(</span>wx<span class="syntax3">,</span> wy<span class="syntax3">,</span> wz<span class="syntax3">)</span>
+<span class="syntax1">BEGIN</span>
+    graph <span class="syntax3">=</span> <span class="syntax2">11</span><span class="syntax3">;</span>
+    <span class="syntax1">LOOP</span>
+        <span class="syntax5">// proyectar manualmente cada frame</span>
+        <span class="syntax1">if</span> <span class="syntax3">(</span>MODE9_BILLBOARD<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">,</span> wx<span class="syntax3">,</span> wy<span class="syntax3">,</span> wz<span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">))</span>
+            <span class="syntax5">// visible: la DLL ya ha puesto x, y, size, z</span>
+        <span class="syntax1">end</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+<span class="syntax1">END</span>
+</pre>
+    </div>
+    <p>Si prefieres no llamar cada frame, asigna <strong>ctype = c_m9</strong> al proceso y deja x,y,z en coordenadas de mundo: el modo 9 lo proyecta automáticamente.</p>
+    <hr />
+    Ver: <a href="mode9_project.html">MODE9_PROJECT()</a> - <a href="mode9_occlude.html">MODE9_OCCLUDE()</a> - <a href="mode9_ctype.html">MODE9_CTYPE()</a> - <a href="mode9_loadfpg.html">MODE9_LOADFPG()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

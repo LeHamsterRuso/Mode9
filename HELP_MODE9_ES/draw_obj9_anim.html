@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - DRAW_OBJ9_ANIM()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>DRAW_OBJ9_ANIM()</h1>
+    <p><strong>DRAW_OBJ9_ANIM( &lt;handle&gt; , &lt;x&gt; , &lt;y&gt; , &lt;z&gt; , &lt;angle&gt; , &lt;fpos&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Dibuja un modelo animado (cargado con <a href="load_obj9_anim.html">LOAD_OBJ9_ANIM()</a>) en el mundo, igual que <a href="draw_obj9.html">DRAW_OBJ9()</a> dibuja uno quieto. Hay que llamarla <strong>cada frame</strong> (antes del FRAME) por cada copia del modelo que quieras ver.</p>
+    <p>Lo único nuevo es el último parámetro, <strong>fpos</strong>, que indica <strong>en qué punto de la animación está</strong> el modelo en ese instante. En vez de medirlo en poses enteras, se mide en pasos finos: <strong>cada pose son 256 unidades</strong>. Así:</p>
+    <table class="params">
+      <tr><th>fpos vale...</th><th>...y se ve</th></tr>
+      <tr><td class="par">0</td><td>la pose 0 (el primer .OBJ).</td></tr>
+      <tr><td class="par">256</td><td>la pose 1.</td></tr>
+      <tr><td class="par">512</td><td>la pose 2.</td></tr>
+      <tr><td class="par">384</td><td>justo a medio camino entre la pose 1 y la 2 (mezcla suave).</td></tr>
+    </table>
+    <p>Los valores intermedios son los que dan la fluidez: el modo 9 mezcla las dos poses vecinas según lo cerca que estés de cada una. El recorrido completo va de <strong>0</strong> a <strong>nframes&times;256</strong> y, al pasarse, <strong>vuelve solo al principio</strong> (bucle continuo). No tienes que dibujar cada pose una a una: con subir fpos poco a poco, la animación corre sola.</p>
+    <p>La forma más cómoda y robusta de mover fpos es <strong>atarlo al reloj</strong> (timer) en lugar de a un contador propio, así el ciclo dura siempre lo mismo en segundos vaya el juego a los FPS que vaya (ver el ejemplo).</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">handle</td><td>Handle devuelto por LOAD_OBJ9_ANIM.</td></tr>
+      <tr><td class="par">x, y, z</td><td>Posición de mundo en uds DIV2.</td></tr>
+      <tr><td class="par">angle</td><td>Orientación en milésimas de grado.</td></tr>
+      <tr><td class="par">fpos</td><td>Punto de la animación, a razón de 256 por pose (0 = pose 0, 256 = pose 1, valores intermedios = mezcla). Rango 0..nframes&times;256, con bucle automático.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">CONST</span>
+    NFRAMES <span class="syntax3">=</span> <span class="syntax2">10</span><span class="syntax3">;</span>        <span class="syntax5">// poses: CAT0.OBJ .. CAT9.OBJ</span>
+    LOOP_CS <span class="syntax3">=</span> <span class="syntax2">300</span><span class="syntax3">;</span>       <span class="syntax5">// el ciclo dura 300 centesimas = 3 segundos</span>
+<span class="syntax1">PRIVATE</span>
+    fpos<span class="syntax3">;</span>
+<span class="syntax1">END</span>
+    h_cat <span class="syntax3">=</span> LOAD_OBJ9_ANIM<span class="syntax3">(</span><span class="syntax4">&quot;CAT&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CAT.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">,</span> NFRAMES<span class="syntax3">);</span>
+    <span class="syntax1">LOOP</span>
+        <span class="syntax5">// fpos atado al reloj: el bucle dura LOOP_CS sin importar los FPS.</span>
+        <span class="syntax5">// timer[0] avanza en centesimas de segundo; se reparte el ciclo</span>
+        <span class="syntax5">// 0..NFRAMES*256 a lo largo de LOOP_CS y se repite con el modulo (%).</span>
+        fpos <span class="syntax3">=</span> <span class="syntax3">(</span>timer<span class="syntax3">[</span><span class="syntax2">0</span><span class="syntax3">]</span> <span class="syntax3">%</span> LOOP_CS<span class="syntax3">)</span> <span class="syntax3">*</span> <span class="syntax3">(</span>NFRAMES <span class="syntax3">*</span> <span class="syntax2">256</span><span class="syntax3">)</span> <span class="syntax3">/</span> LOOP_CS<span class="syntax3">;</span>
+        DRAW_OBJ9_ANIM<span class="syntax3">(</span>h_cat<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> fpos<span class="syntax3">);</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+</pre>
+    </div>
+    <p>Como el modo 9 mezcla las poses por ti, una animación fluida necesita muy pocos ficheros (diez poses bastan para un ciclo de andar suave). Para ir más rápido o más lento, baja o sube <strong>LOOP_CS</strong> (los segundos que dura una vuelta).</p>
+    <div class="nota"><strong>Truco:</strong> un modelo cargado con <a href="load_obj9.html">LOAD_OBJ9()</a> (quieto, una sola pose) también se puede dibujar con DRAW_OBJ9_ANIM: como solo tiene una pose, la DLL ignora <strong>fpos</strong> y dibuja siempre esa. Así puedes usar la misma orden para todo.</div>
+    <div class="nota"><strong>Para curiosos (no hace falta saberlo):</strong> por dentro, fpos se parte en dos: las posiciones altas (<strong>fpos&gt;&gt;8</strong>, o sea fpos&divide;256) eligen la pose de partida, y las bajas (<strong>fpos&amp;255</strong>, el resto) dicen cuánto se mezcla hacia la siguiente. Por eso 256 = una pose justa y 384 = pose y media.</div>
+    <hr />
+    Ver: <a href="load_obj9_anim.html">LOAD_OBJ9_ANIM()</a> - <a href="draw_obj9.html">DRAW_OBJ9()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

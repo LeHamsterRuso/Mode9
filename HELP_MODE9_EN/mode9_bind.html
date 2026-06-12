@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_BIND()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_BIND()</h1>
+    <p><strong>MODE9_BIND( &lt;OFFSET m9.z&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Tells mode 9 WHICH <strong>m9</strong> structure to read the camera height and tilt from each frame. "Binding" simply connects your <strong>m9</strong> variable to the DLL so that whenever you change <strong>m9.height</strong> or <strong>m9.angle</strong> in your program, the camera reacts immediately.</p>
+    <p>In practice you <strong>almost never</strong> need to call this: <a href="start_mode9.html">START_MODE9()</a> already performs this binding via its second parameter. It is only useful in one specific case: when you have <strong>multiple cameras</strong>, each with its own m9 structure, and you want to switch between them without stopping and restarting the render.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">OFFSET m9.z</td><td>The <strong>m9</strong> structure you want mode 9 to use. Always pass its first field with <strong>OFFSET m9.z</strong> (or <strong>&amp;m9.z</strong>).</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Two cameras: the player's and a security camera.</span>
+<span class="syntax5">// Each stores ITS OWN height and tilt in its own structure.</span>
+<span class="syntax1">GLOBAL</span>
+    <span class="syntax1">STRUCT</span> m9_player  z<span class="syntax3">;</span> camera<span class="syntax3">;</span> height<span class="syntax3">;</span> angle<span class="syntax3">;</span>  <span class="syntax1">END</span>
+    <span class="syntax1">STRUCT</span> m9_seccam  z<span class="syntax3">;</span> camera<span class="syntax3">;</span> height<span class="syntax3">;</span> angle<span class="syntax3">;</span>  <span class="syntax1">END</span>
+<span class="syntax1">BEGIN</span>
+    <span class="syntax3">...</span>
+    <span class="syntax5">// Press TAB to switch to the security camera view</span>
+    <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_tab<span class="syntax3">))</span>
+        MODE9_BIND<span class="syntax3">(</span><span class="syntax1">OFFSET</span> m9_seccam<span class="syntax3">.</span>z<span class="syntax3">);</span>   <span class="syntax5">// 3D now uses the other camera</span>
+    <span class="syntax1">end</span>
+    <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_space<span class="syntax3">))</span>
+        MODE9_BIND<span class="syntax3">(</span><span class="syntax1">OFFSET</span> m9_player<span class="syntax3">.</span>z<span class="syntax3">);</span>  <span class="syntax5">// back to player view</span>
+    <span class="syntax1">end</span>
+<span class="syntax1">END</span>
+</pre>
+    </div>
+    <p>If your game has a single camera (the normal case), forget this function: the second parameter of <a href="start_mode9.html">START_MODE9()</a> is enough.</p>
+    <hr />
+    See: <a href="start_mode9.html">START_MODE9()</a> - <a href="mode9_set.html">MODE9_SET()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

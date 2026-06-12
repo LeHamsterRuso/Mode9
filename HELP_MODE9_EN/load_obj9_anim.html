@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - LOAD_OBJ9_ANIM()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>LOAD_OBJ9_ANIM()</h1>
+    <p><strong>LOAD_OBJ9_ANIM( &lt;base&gt; , &lt;MAP texture&gt; , &lt;scale&gt; , &lt;nframes&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Loads an <strong>animated</strong> 3D model, just as <a href="load_obj9.html">LOAD_OBJ9()</a> loads a still one. The animation is stored as several separate <strong>poses</strong> (for example, the different postures of a meowing cat), and each pose is its own <strong>.OBJ</strong> file.</p>
+    <p>The pose files are all named the same except for a <strong>number at the end, starting at 0</strong>. You pass the shared name (the <strong>base</strong>) and how many poses there are (<strong>nframes</strong>), and mode 9 loads them all. For example, with base = <strong>"CAT"</strong> and nframes = <strong>10</strong>, it looks for the files <strong>CAT0.OBJ</strong>, <strong>CAT1.OBJ</strong> ... up to <strong>CAT9.OBJ</strong>.</p>
+    <p>To look smooth, the animation does not need one pose per instant: a few key poses are enough, because mode 9 fills in the steps between them by <strong>gradually moving each point from one pose to the next</strong> (this is called <em>morphing</em> or interpolation). Ten poses are enough for a smooth walk cycle.</p>
+    <p><strong>Important:</strong> every pose must be the <strong>same model</strong>, only with its points placed differently; that is, they must all have the same number of vertices, the same triangles and the same UVs. Only <em>where</em> each point sits changes, not how many there are. (In Blender: model one pose and move its vertices for the others, without adding or removing anything.)</p>
+    <p>The whole animation takes <strong>a single model slot</strong>, no matter how many poses it has. The files load in the background, one per frame (it does not block the game), and you draw it with <a href="draw_obj9_anim.html">DRAW_OBJ9_ANIM()</a>.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">base</td><td>Shared name of the poses, without the number or extension (e.g. <strong>"CAT"</strong> &rarr; CAT0.OBJ, CAT1.OBJ...). Remember the DOS limit: base + the number must total 8 characters or fewer (CAT + 0..9 fits easily).</td></tr>
+      <tr><td class="par">MAP texture</td><td>The model's .MAP texture (or <strong>""</strong> for flat shading with no texture).</td></tr>
+      <tr><td class="par">scale</td><td>DIV2 units per OBJ unit (same as in LOAD_OBJ9).</td></tr>
+      <tr><td class="par">nframes</td><td>How many poses the animation has (how many files, numbered 0..nframes-1).</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> A handle 1..N for the animated model (0 if no free slots).</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">GLOBAL</span>
+    h_cat<span class="syntax3">;</span>
+<span class="syntax1">BEGIN</span>
+    <span class="syntax5">// 10 poses: CAT0.OBJ .. CAT9.OBJ (same model, vertices moved)</span>
+    h_cat <span class="syntax3">=</span> LOAD_OBJ9_ANIM<span class="syntax3">(</span><span class="syntax4">&quot;CAT&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CAT.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">,</span> <span class="syntax2">10</span><span class="syntax3">);</span>
+    <span class="syntax3">...</span>
+<span class="syntax1">END</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="draw_obj9_anim.html">DRAW_OBJ9_ANIM()</a> - <a href="load_obj9.html">LOAD_OBJ9()</a> - <a href="mode9_obj9_ready.html">MODE9_OBJ9_READY()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

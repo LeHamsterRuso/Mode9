@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - LOAD_OBJ9()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>LOAD_OBJ9()</h1>
+    <p><strong>LOAD_OBJ9( &lt;fichero OBJ&gt; , &lt;textura MAP&gt; , &lt;escala&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Carga un modelo 3D de objeto (un NPC o un prop tridimensional, no el escenario). A diferencia del escenario, puedes tener varios modelos cargados a la vez y dibujar cada uno en muchas posiciones con <a href="draw_obj9.html">DRAW_OBJ9()</a>.</p>
+    <p>Devuelve el handle al INSTANTE; la carga del fichero se hace EN SEGUNDO PLANO (no bloquea, un fichero por frame). El modelo no se dibuja hasta que termina de cargar: DRAW_OBJ9 lo ignora mientras tanto, así que el objeto aparece solo cuando esta listo. Usa <a href="mode9_obj9_ready.html">MODE9_OBJ9_READY()</a> si necesitas saber cuando esta. Los modelos se conservan hasta <a href="stop_mode9.html">STOP_MODE9()</a>.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">fichero OBJ</td><td>Fichero .OBJ del modelo (Y hacia arriba, triangulado; UVs opcionales).</td></tr>
+      <tr><td class="par">textura MAP</td><td>Textura .MAP del modelo. <strong>""</strong> = flat-shading con la rampa de sombreado del mundo.</td></tr>
+      <tr><td class="par">escala</td><td>Unidades DIV2 por unidad OBJ del modelo (igual concepto que el unitscale del escenario).</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> Un handle 1..N del modelo (0 si no hay slots libres).</p>
+    <div class="nota"><strong>Nota:</strong> La carga en segundo plano evita que se dispare el watchdog (excepción 142) aunque cargues muchos modelos.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">GLOBAL</span>
+    h_npc<span class="syntax3">;</span>
+<span class="syntax1">BEGIN</span>
+    <span class="syntax3">...</span>
+    h_npc <span class="syntax3">=</span> LOAD_OBJ9<span class="syntax3">(</span><span class="syntax4">&quot;KNIGHT.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/KNIGHT.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+    <span class="syntax1">LOOP</span>
+        <span class="syntax5">// dibujar el modelo en el mundo cada frame</span>
+        DRAW_OBJ9<span class="syntax3">(</span>h_npc<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+<span class="syntax1">END</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="draw_obj9.html">DRAW_OBJ9()</a> - <a href="load_obj9_anim.html">LOAD_OBJ9_ANIM()</a> - <a href="mode9_obj9_ready.html">MODE9_OBJ9_READY()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - LOAD_WLD9()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>LOAD_WLD9()</h1>
+    <p><strong>LOAD_WLD9( &lt;OBJ file&gt; , &lt;MAP texture&gt; , &lt;scale&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Loads the 3D scene in ONE single call: the mesh from the <strong>.OBJ</strong> file, its <strong>.MAP</strong> texture and the scale (DIV2 units per OBJ unit). It is the equivalent of mode 8's <strong>load_wld()</strong>: it serves both for loading the first level and for HOT-SWAPPING levels at runtime.</p>
+    <p>The scene is an arbitrary mesh (walls, floors and ceilings at any angle) modelled, for example, in Blender and exported as a triangulated OBJ with Y up. The texture from this parameter is <strong>material 0</strong> and is applied by default to all materials; you can assign a different texture to each <strong>usemtl</strong> with <a href="mode9_material.html">MODE9_MATERIAL()</a>.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">OBJ file</td><td>Name of the scene's .OBJ file. Remember the DOS limit: the base name must be 8 characters or fewer, otherwise loading will fail silently.</td></tr>
+      <tr><td class="par">MAP texture</td><td>The .MAP file for material 0. If you pass <strong>""</strong> or <strong>"0"</strong>, the scene is drawn with flat-shading (no texture).</td></tr>
+      <tr><td class="par">scale</td><td>DIV2 units per OBJ unit (unitscale). 100 is the usual value; doubling it (200) makes the scene twice as large. A value &lt;=0 leaves the current scale unchanged.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> The number of triangles loaded (0 if loading fails).</p>
+    <div class="nota"><strong>Note:</strong> Loading is BLOCKING: with very large scenes the watchdog exception 142 ("process seems stuck, waiting for FRAME") may trigger. If it does, you can suppress it with <strong>ignore_error(142)</strong>.</div>
+    <div class="nota"><strong>Note:</strong> Changing the map with LOAD_WLD9 does NOT require stopping mode 9: it frees the old mesh and materials and rebuilds the collision data without touching the camera.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Load the castle courtyard (material 0 = CASTLE.MAP)</span>
+ntris <span class="syntax3">=</span> LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+<span class="syntax1">if</span> <span class="syntax3">(</span>ntris <span class="syntax3">==</span> <span class="syntax2">0</span><span class="syntax3">)</span>
+    say<span class="syntax3">(</span><span class="syntax4">&quot;Could not load the scene&quot;</span><span class="syntax3">);</span>
+<span class="syntax1">end</span>
+
+<span class="syntax5">// ... later, when crossing a door, hot-swap the map:</span>
+LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTIN.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTIN.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+x <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span> y <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">300</span><span class="syntax3">;</span> angle <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">90000</span><span class="syntax3">;</span>   <span class="syntax5">// reposition the player in the new map</span>
+</pre>
+    </div>
+    <p>The return value (number of triangles) lets you verify that loading succeeded: 0 means the file does not exist or is invalid.</p>
+    <hr />
+    See: <a href="mode9_material.html">MODE9_MATERIAL()</a> - <a href="mode9_settex.html">MODE9_SETTEX()</a> - <a href="mode9_unitscale.html">MODE9_UNITSCALE()</a> - <a href="start_mode9.html">START_MODE9()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

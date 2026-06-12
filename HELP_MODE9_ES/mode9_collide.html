@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_COLLIDE()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_COLLIDE()</h1>
+    <p><strong>MODE9_COLLIDE( &lt;id del proceso&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Empuja CUALQUIER proceso fuera de las paredes (deslizando a lo largo de ellas) y reescribe sus campos <strong>x</strong>, <strong>y</strong>. Pensada para que los NPCs y enemigos respeten las paredes igual que la cámara.</p>
+    <p>Usa el campo <strong>radius</strong> del proceso (30 por defecto). Si <a href="mode9_step.html">MODE9_STEP()</a> es mayor que 0, ademas apoya al proceso sobre el suelo.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">id del proceso</td><td>Identificador del proceso (NPC, enemigo...) que se quiere mantener fuera de las paredes.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 1 si lo desplazó, 0 si no.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">PROCESS</span> enemigo<span class="syntax3">()</span>
+<span class="syntax1">BEGIN</span>
+    radius <span class="syntax3">=</span> <span class="syntax2">40</span><span class="syntax3">;</span>
+    <span class="syntax1">LOOP</span>
+        advance<span class="syntax3">(</span><span class="syntax2">10</span><span class="syntax3">);</span>            <span class="syntax5">// moverse</span>
+        MODE9_COLLIDE<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">);</span>      <span class="syntax5">// ...sin atravesar paredes</span>
+        <span class="syntax5">// colocarlo como billboard en el escenario</span>
+        MODE9_BILLBOARD<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">,</span> x<span class="syntax3">,</span> y<span class="syntax3">,</span> z<span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+<span class="syntax1">END</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_collision.html">MODE9_COLLISION()</a> - <a href="mode9_step.html">MODE9_STEP()</a> - <a href="mode9_billboard.html">MODE9_BILLBOARD()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_UNITSCALE()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_UNITSCALE()</h1>
+    <p><strong>MODE9_UNITSCALE( &lt;units&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Decides how large the scene appears. When you model in a 3D application, a wall might measure "2 units"; but in DIV distances are measured on a different scale. This function sets the equivalence: how many DIV units equal one model unit. With 100 (the default), 1 OBJ unit equals 100 game units; with 200, the entire scene is twice as large and you need to walk twice as far to cross it.</p>
+    <p>Normally you do not need to call this, because you already specify the scale as the third parameter of <a href="load_wld9.html">LOAD_WLD9()</a>. Use it only if you want to change the scale separately.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">units</td><td>How many DIV units equal 1 OBJ model unit. 100 = default; 200 = everything twice as large; 50 = everything half size.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+MODE9_UNITSCALE<span class="syntax3">(</span><span class="syntax2">100</span><span class="syntax3">);</span>   <span class="syntax5">// 1 Blender unit = 100 DIV2 units</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="load_wld9.html">LOAD_WLD9()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

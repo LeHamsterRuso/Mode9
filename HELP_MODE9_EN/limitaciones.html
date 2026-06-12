@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - Limitations</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>Library limitations</h1>
+    <p>Mode 9 is an engine designed to run on modest hardware, so it has fixed
+    limits on the amount of geometry, textures and objects it can handle at once. It is worth
+    knowing these before designing levels so there are no surprises. If you exceed any of them,
+    the excess is simply not drawn or not loaded.</p>
+    <div class="cat">
+      <h2>Scene (LOAD_WLD9)</h2>
+      <table class="params">
+        <tr><th>Resource</th><th>Maximum</th><th>Notes</th></tr>
+        <tr><td class="par">Vertices</td><td>4096</td><td>Points in the scene mesh.</td></tr>
+        <tr><td class="par">Triangles (faces)</td><td>8192</td>
+            <td>Total scene faces. Although 8192 fit, the fewer the better for performance.</td></tr>
+        <tr><td class="par">Materials</td><td>16</td><td>Different textures per scene (usemtl 0..15).</td></tr>
+        <tr><td class="par">Texture per material</td><td>1024 x 1024 px</td><td>DIV .MAP files.</td></tr>
+        <tr><td class="par">Collision walls</td><td>4096</td>
+            <td>Vertical faces that stop the player. A subset of the total triangles.</td></tr>
+        <tr><td class="par">Collision floors</td><td>4096</td>
+            <td>Near-horizontal faces that support the player (ramps and steps).</td></tr>
+      </table>
+    </div>
+    <div class="cat">
+      <h2>Object models (LOAD_OBJ9 / LOAD_OBJ9_ANIM)</h2>
+      <table class="params">
+        <tr><th>Resource</th><th>Maximum</th><th>Notes</th></tr>
+        <tr><td class="par">Distinct models at once</td><td>8</td>
+            <td>Simultaneously loaded models. A complete animation, with all its poses, takes 1
+            slot (not 1 per pose).</td></tr>
+        <tr><td class="par">Instances per frame</td><td>32</td>
+            <td>How many times you can call <a href="draw_obj9.html">DRAW_OBJ9()</a>
+            or <a href="draw_obj9_anim.html">DRAW_OBJ9_ANIM()</a> in one frame across all models
+            combined.</td></tr>
+        <tr><td class="par">Vertices per model</td><td>512</td>
+            <td>Per pose. In an animation, every pose shares this same cap (they all have the same
+            vertex count).</td></tr>
+        <tr><td class="par">Triangles per model</td><td>1024</td><td>&nbsp;</td></tr>
+        <tr><td class="par">Poses per animation (nframes)</td><td>no fixed cap</td>
+            <td>There is no maximum baked into the DLL: memory and the file name are the limits.
+            Each pose stores only its vertex positions (512 &times; 12 bytes &asymp; 6 KB per pose),
+            so even a long animation uses little.</td></tr>
+      </table>
+    </div>
+    <div class="nota"><strong>About the number of poses in an animation:</strong> because the files are
+    numbered (CAT0.OBJ, CAT1.OBJ...), the name is still bound by the DOS 8-character limit. With a
+    6-letter <strong>base</strong> you only have room for 2 digits (up to 99 poses); with a short one
+    like "CAT" you can reach thousands. In practice you never need that many: mode 9 blends the
+    in-between poses for you, and 8&ndash;12 poses already give a very smooth cycle (see
+    <a href="draw_obj9_anim.html">DRAW_OBJ9_ANIM()</a>).</div>
+    <div class="cat">
+      <h2>Sprites, cameras and sky</h2>
+      <table class="params">
+        <tr><th>Resource</th><th>Maximum</th><th>Notes</th></tr>
+        <tr><td class="par">Simultaneous billboards (c_m9)</td><td>256</td>
+            <td>Flat sprites in the world. Far more headroom than 3D models.</td></tr>
+        <tr><td class="par">Viewports (split-screen)</td><td>4</td>
+            <td>Simultaneous cameras with <a href="mode9_split.html">MODE9_SPLIT()</a>.</td></tr>
+        <tr><td class="par">Regions</td><td>16</td>
+            <td>Screen areas with <a href="mode9_region.html">MODE9_REGION()</a>.</td></tr>
+        <tr><td class="par">Panoramic sky</td><td>4096 x 2048 px</td>
+            <td>.MAP sky texture (<a href="load_sky9.html">LOAD_SKY9()</a>).</td></tr>
+      </table>
+    </div>
+    <div class="cat">
+      <h2>Tips for working around the limits</h2>
+      <p><strong>Too many scene polygons:</strong> let textures provide the detail
+      instead of geometry (a brick wall is one quad with a good texture, not a thousand modelled
+      bricks). And if a level is huge, split it into smaller maps and load the next one with
+      <a href="load_wld9.html">LOAD_WLD9()</a> when the player changes area: since loading is
+      hot, it feels like a seamless world.</p>
+      <p><strong>More than 16 materials:</strong> pack several small textures into a single
+      1024x1024 .MAP (a "texture atlas") and use UVs to pick each face's portion. One material
+      then does the work of many.</p>
+      <p><strong>More than 8 3D models or more than 32 instances per frame:</strong> reserve 3D
+      models for what matters (the protagonist, nearby enemies) and do the rest with
+      <strong>billboards</strong>, which support up to 256. The same model can also be reused with
+      different textures to add variety without spending extra slots.</p>
+      <p><strong>Models that are too dense:</strong> simplify the mesh before exporting (in
+      Blender, the <em>Decimate</em> modifier). The engine is low-resolution and a very detailed
+      model does not look better — it just runs slower.</p>
+      <p><strong>If the game runs slowly:</strong> not a hard limit, but it helps to cut the view
+      distance with <a href="set_fog9.html">SET_FOG9()</a> or
+      <a href="mode9_farclip.html">MODE9_FARCLIP()</a> and lower the render resolution with
+      <a href="mode9_downscale.html">MODE9_DOWNSCALE()</a>.</p>
+    </div>
+    <div class="nota"><strong>Note for programmers:</strong> these limits are
+    fixed in the <strong>MODE9.DLL</strong> source code (constants <strong>MAX_TRIS</strong>,
+    <strong>MAX_OBJ9_MODELS</strong>, etc.). Whoever compiles the DLL can raise them, at the cost
+    of higher memory usage.</div>
+    <hr />
+    See: <a href="modelos.html">OBJ Models</a> - <a href="load_wld9.html">LOAD_WLD9()</a> - <a href="load_obj9.html">LOAD_OBJ9()</a> - <a href="mode9_downscale.html">MODE9_DOWNSCALE()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

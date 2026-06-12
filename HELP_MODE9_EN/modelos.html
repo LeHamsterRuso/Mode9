@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - OBJ Models</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>How to prepare OBJ models</h1>
+    <p>Both the scene (<a href="load_wld9.html">LOAD_WLD9()</a>) and 3D objects
+    (<a href="load_obj9.html">LOAD_OBJ9()</a>) are loaded from <strong>.OBJ</strong> files,
+    the mesh format exported by modelling applications such as Blender, Wings3D or MilkShape.
+    For mode 9 to read them correctly, they must be exported with specific settings.</p>
+    <div class="cat">
+      <h2>Export settings</h2>
+      <table class="params">
+        <tr><th>Setting</th><th>Value</th><th>Why</th></tr>
+        <tr><td class="par">Faces</td><td>Triangulated</td>
+            <td>The engine only draws triangles. If the model has quads or n-gons,
+            triangulate it before exporting (in Blender: <em>Triangulate Faces</em>, or tick
+            <em>Triangulated Mesh</em> in the export dialog).</td></tr>
+        <tr><td class="par">Forward axis</td><td>-Z</td>
+            <td>Forward axis set to <strong>-Z</strong>, so the model's front aligns with
+            the world's front.</td></tr>
+        <tr><td class="par">Up axis</td><td>Y</td>
+            <td>Vertical axis in <strong>Y</strong> (Y up). This is Blender's default, so
+            normally nothing needs to be changed.</td></tr>
+        <tr><td class="par">UVs</td><td>Included (if textured)</td>
+            <td>If the model is textured, export the UV coordinates. Without UVs the
+            model is drawn with single-colour flat-shading.</td></tr>
+      </table>
+      <p>With those axes (<strong>Forward -Z</strong>, <strong>Up Y</strong>) the
+      model fits directly into mode 9's world coordinate system, where Y is the height axis.</p>
+    </div>
+    <div class="cat">
+      <h2>Materials and textures</h2>
+      <p>A scene can have several materials declared with
+      <strong>usemtl</strong> in the OBJ. They are numbered in order of appearance (0, 1, 2...) and
+      each is assigned a texture with <a href="mode9_material.html">MODE9_MATERIAL()</a>
+      (material 0 is already set by <a href="load_wld9.html">LOAD_WLD9()</a>).</p>
+      <table class="params">
+        <tr><th>Limit</th><th>Value</th><th>Notes</th></tr>
+        <tr><td class="par">Materials per scene</td><td>16</td>
+            <td>Numbered 0 to 15, in the order of the <strong>usemtl</strong> entries.</td></tr>
+        <tr><td class="par">Texture size per material</td><td>1024 x 1024 px maximum</td>
+            <td>Textures are DIV <strong>.MAP</strong> files (palette-indexed to the game palette).
+            Common sizes are powers of two: 128, 256, 512 or 1024.</td></tr>
+      </table>
+    </div>
+    <div class="nota"><strong>Watch out for file names:</strong> mode 9 runs
+    on DOS, so the file name (.OBJ and .MAP) must have <strong>8 characters or fewer</strong>
+    (not counting the extension). For example <strong>CASTIN.OBJ</strong> is valid, but
+    <strong>CASTLE_IN.OBJ</strong> (9 letters) would fail to load <em>silently</em>: the model
+    would simply appear empty. If a model does not appear, the first thing to check is the
+    filename length.</div>
+    <h2>Workflow summary</h2>
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// 1) In Blender: triangulate the mesh and export to OBJ with</span>
+<span class="syntax5">//    Forward axis = -Z, Up axis = Y, and include UVs.</span>
+<span class="syntax5">//    Save the .OBJ with a name of 8 letters or fewer: CASTLE.OBJ</span>
+
+<span class="syntax5">// 2) Convert textures to .MAP (1024x1024 maximum) with DIV.</span>
+
+<span class="syntax5">// 3) In the PRG, load everything:</span>
+LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>  <span class="syntax5">// mesh + material 0</span>
+MODE9_MATERIAL<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/STAIRS.MAP&quot;</span><span class="syntax3">);</span>             <span class="syntax5">// material 1 (usemtl)</span>
+MODE9_MATERIAL<span class="syntax3">(</span><span class="syntax2">2</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/WATER.MAP&quot;</span><span class="syntax3">);</span>              <span class="syntax5">// material 2 (usemtl)</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="load_wld9.html">LOAD_WLD9()</a> - <a href="mode9_material.html">MODE9_MATERIAL()</a> - <a href="load_obj9.html">LOAD_OBJ9()</a> - <a href="limitaciones.html">Limitations</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

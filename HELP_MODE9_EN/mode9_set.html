@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_SET()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_SET()</h1>
+    <p><strong>MODE9_SET( &lt;height&gt; , &lt;pitch&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Sets the camera eye height and its vertical tilt (pitch). Equivalent to mode 8's <strong>m8.height</strong> and <strong>m8.angle</strong> variables.</p>
+    <p>You can also write directly to <strong>m9.height</strong> and <strong>m9.angle</strong> in the structure: the DLL reads them every frame through the BIND.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">height</td><td>Camera eye height above the ground, in DIV2 units (equivalent to m9.height).</td></tr>
+      <tr><td class="par">pitch</td><td>Vertical look angle, in thousandths of a degree. 0 = looking at the horizon; positive = upward; negative = downward (equivalent to m9.angle).</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Standing height, looking at the horizon</span>
+MODE9_SET<span class="syntax3">(</span><span class="syntax2">70</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+
+<span class="syntax5">// ...or control pitch with the mouse by writing to the structure:</span>
+m9<span class="syntax3">.</span>angle <span class="syntax3">+=</span> mouse<span class="syntax3">.</span>y <span class="syntax3">*</span> <span class="syntax2">100</span><span class="syntax3">;</span>
+<span class="syntax1">if</span> <span class="syntax3">(</span>m9<span class="syntax3">.</span>angle <span class="syntax3">&gt;</span>  <span class="syntax2">45000</span><span class="syntax3">)</span> m9<span class="syntax3">.</span>angle <span class="syntax3">=</span>  <span class="syntax2">45000</span><span class="syntax3">;</span> <span class="syntax1">end</span>
+<span class="syntax1">if</span> <span class="syntax3">(</span>m9<span class="syntax3">.</span>angle <span class="syntax3">&lt;</span> <span class="syntax3">-</span><span class="syntax2">45000</span><span class="syntax3">)</span> m9<span class="syntax3">.</span>angle <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">45000</span><span class="syntax3">;</span> <span class="syntax1">end</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="start_mode9.html">START_MODE9()</a> - <a href="mode9_bind.html">MODE9_BIND()</a> - <a href="mode9_fov.html">MODE9_FOV()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - STOP_MODE9()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>STOP_MODE9()</h1>
+    <p><strong>STOP_MODE9()</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Deactivates the 3D scene render. After calling it, the background layer reverts to DIV2's own: <strong>put_screen</strong>, put and scroll become visible again normally, making this the right function to call before showing a 2D screen (pause menu, game-over screen, etc.).</p>
+    <p>The loaded scene, textures and models are preserved: you can re-activate the render with <a href="start_mode9.html">START_MODE9()</a> without reloading anything.</p>
+    <p>This was the key fix to make <strong>put_screen</strong> work again: while mode 9 is active, the DLL owns the background layer; when stopped, it restores the engine's 2D background.</p>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <div class="nota"><strong>Note:</strong> To change the map you do NOT need to stop mode 9: <a href="load_wld9.html">LOAD_WLD9()</a> hot-reloads the scene without touching the camera or the render state.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Pause: stop the 3D, show a 2D menu, then resume</span>
+<span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_esc<span class="syntax3">))</span>
+    STOP_MODE9<span class="syntax3">();</span>                       <span class="syntax5">// background reverts to 2D</span>
+    write<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">160</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">,</span> <span class="syntax2">4</span><span class="syntax3">,</span> <span class="syntax4">&quot;PAUSED - press ENTER&quot;</span><span class="syntax3">);</span>
+    <span class="syntax1">repeat</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">until</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_enter<span class="syntax3">))</span>
+    delete_text<span class="syntax3">(</span>all_text<span class="syntax3">);</span>
+    START_MODE9<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>    <span class="syntax5">// resume 3D render</span>
+<span class="syntax1">end</span>
+</pre>
+    </div>
+    <p>While mode 9 is stopped, texts and processes with graphics (sprites) are still visible; what is restored is the engine's 2D background.</p>
+    <hr />
+    See: <a href="start_mode9.html">START_MODE9()</a> - <a href="load_wld9.html">LOAD_WLD9()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

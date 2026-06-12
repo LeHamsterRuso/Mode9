@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - SET_ENV_COLOR9()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>SET_ENV_COLOR9()</h1>
+    <p><strong>SET_ENV_COLOR9( &lt;r&gt; , &lt;g&gt; , &lt;b&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Sets the background colour — what you see behind the scene where there are no walls or floors (the plain "sky", when no sky texture has been loaded). This same colour is also used for fog, so with it you define the general atmosphere of the scene: a light blue for a clear day, a grey for an overcast day, a dark tone for an interior or nighttime.</p>
+    <p>Each colour is given as its three red, green and blue components, from <strong>0 to 100</strong>: 0 is none of that colour and 100 is the maximum (so 0,0,0 is black and 100,100,100 is white).</p>
+    <p>If you have set a sky texture (<a href="load_sky9.html">LOAD_SKY9()</a>), that sky covers the background colour, but the colour is still used for fog.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">r</td><td>Red component of the background/fog colour, 0..100.</td></tr>
+      <tr><td class="par">g</td><td>Green component, 0..100.</td></tr>
+      <tr><td class="par">b</td><td>Blue component, 0..100.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+SET_ENV_COLOR9<span class="syntax3">(</span><span class="syntax2">30</span><span class="syntax3">,</span> <span class="syntax2">35</span><span class="syntax3">,</span> <span class="syntax2">50</span><span class="syntax3">);</span>   <span class="syntax5">// bluish twilight sky</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="set_fog9.html">SET_FOG9()</a> - <a href="load_sky9.html">LOAD_SKY9()</a> - <a href="sky9_off.html">SKY9_OFF()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

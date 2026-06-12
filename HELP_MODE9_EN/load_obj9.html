@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - LOAD_OBJ9()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>LOAD_OBJ9()</h1>
+    <p><strong>LOAD_OBJ9( &lt;OBJ file&gt; , &lt;MAP texture&gt; , &lt;scale&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Loads a 3D object model (an NPC or a three-dimensional prop, not the scene). Unlike the scene, you can have multiple models loaded at the same time and draw each of them at many positions with <a href="draw_obj9.html">DRAW_OBJ9()</a>.</p>
+    <p>Returns the handle IMMEDIATELY; the file is loaded IN THE BACKGROUND (non-blocking, one file per frame). The model is not drawn until loading finishes: DRAW_OBJ9 ignores it until then, so the object appears only when it is ready. Use <a href="mode9_obj9_ready.html">MODE9_OBJ9_READY()</a> if you need to know when it is. Models are kept until <a href="stop_mode9.html">STOP_MODE9()</a>.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">OBJ file</td><td>.OBJ file for the model (Y up, triangulated; UVs optional).</td></tr>
+      <tr><td class="par">MAP texture</td><td>The model's .MAP texture. <strong>""</strong> = flat-shading with the world shading ramp.</td></tr>
+      <tr><td class="par">scale</td><td>DIV2 units per OBJ unit for this model (same concept as the scene unitscale).</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> A handle 1..N for the model (0 if no free slots).</p>
+    <div class="nota"><strong>Note:</strong> Background loading avoids the watchdog exception (142) even when loading many models.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">GLOBAL</span>
+    h_npc<span class="syntax3">;</span>
+<span class="syntax1">BEGIN</span>
+    <span class="syntax3">...</span>
+    h_npc <span class="syntax3">=</span> LOAD_OBJ9<span class="syntax3">(</span><span class="syntax4">&quot;KNIGHT.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/KNIGHT.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+    <span class="syntax1">LOOP</span>
+        <span class="syntax5">// draw the model in the world each frame</span>
+        DRAW_OBJ9<span class="syntax3">(</span>h_npc<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+<span class="syntax1">END</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="draw_obj9.html">DRAW_OBJ9()</a> - <a href="load_obj9_anim.html">LOAD_OBJ9_ANIM()</a> - <a href="mode9_obj9_ready.html">MODE9_OBJ9_READY()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - Inicio</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>El Modo 9 de DIV Games Studio 2</h1>
+    <p>El <strong>modo 9</strong> (la librería <strong>MODE9.DLL</strong>) es una ampliación de
+    DIV Games Studio 2  para mostrar y recorrer un <strong>escenario en tres
+    dimensiones</strong> que cargas desde un fichero <strong>.OBJ</strong> (el formato de malla
+    que exportan programas como Blender). A diferencia de un fondo plano, el escenario tiene
+    volumen real: paredes, suelos, techos y rampas con cualquier inclinación, y te puedes mover
+    libremente por dentro de él.</p>
+    <p>Es el hermano mayor del <strong>modo 8</strong>: allí el mapa se construía
+    con sectores planos (.WLD); aquí el mapa es una malla 3D cualquiera modelada en un programa
+    de 3D. La <strong>cámara</strong> es un proceso normal de DIV que colocas donde quieras y
+    apuntas en la dirección que quieras. Lo más habitual es ponerla en los ojos del jugador
+    (vista en primera persona, como en los ejemplos), pero nada te obliga a ello: también sirve
+    para una cámara que sigue al personaje por detrás, una vista cenital o cámaras fijas.</p>
+    <p>Sobre ese escenario 3D puedes dibujar tus personajes y objetos de dos
+    maneras: como <strong>sprites planos</strong> (dibujos 2D que se escalan con la distancia y
+    siempre miran a la cámara, igual que en el <strong>modo 7</strong>) o como
+    <strong>modelos 3D</strong> de verdad, con animación suave.</p>
+    <div class="cat">
+      <h2>Conceptos básicos</h2>
+      <p>Mover la cámara no tiene ningún misterio: como es un proceso normal,
+      la adelantas con <strong>advance()</strong>, la mueves de lado con <strong>xadvance()</strong>,
+      la haces girar cambiando su campo <strong>angle</strong> y la subes o la bajas con la
+      altura del ojo (<strong>m9.height</strong>). Lo que ves en pantalla es el mundo desde donde
+      esté ese proceso.</p>
+      <p><strong>Sistema de coordenadas del mundo</strong> (uds DIV2, divididas
+      por el unitscale para pasar a unidades OBJ):</p>
+      <table class="params">
+        <tr><th>Eje</th><th>Significado</th></tr>
+        <tr><td class="par">X = proceso.x</td><td>Plano del suelo (este / oeste).</td></tr>
+        <tr><td class="par">Z = proceso.y</td><td>Plano del suelo (norte / sur).</td></tr>
+        <tr><td class="par">Y = proceso.z + m9.height</td><td>Eje vertical (altura, Y hacia arriba como en Blender / OBJ).</td></tr>
+        <tr><td class="par">yaw = proceso.angle</td><td>Giro horizontal, en milésimas de grado (180000 = 180 grados).</td></tr>
+        <tr><td class="par">pitch = m9.angle</td><td>Inclinación vertical, en milésimas de grado (0 = horizonte).</td></tr>
+      </table>
+    </div>
+    <div class="nota"><strong>Sobre m9 y c_m9:</strong> una DLL no puede crear
+    STRUCTs ni c_types del lenguaje DIV2 (los genera el compilador). Por eso la estructura
+    <strong>m9</strong> (campos <strong>z, camera, height, angle</strong>, los mismos que m8) y
+    la constante <strong>c_m9 = 200</strong> se declaran en el PRG y se le pasan a la DLL con
+    <a href="start_mode9.html">START_MODE9()</a> y <a href="mode9_set.html">MODE9_SET()</a>. Los
+    procesos billboard usan <strong>ctype = c_m9</strong>.</div>
+    <h2 style="color:#5a5a5a">Un programa mínimo</h2>
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">PROGRAM</span> mode9_demo<span class="syntax3">;</span>
+<span class="syntax1">IMPORT</span> <span class="syntax4">&quot;MODE9.DLL&quot;</span><span class="syntax3">;</span>
+<span class="syntax1">CONST</span>
+    c_m9 <span class="syntax3">=</span> <span class="syntax2">200</span><span class="syntax3">;</span>           <span class="syntax5">// ctype lógico del billboard (debe valer igual en la DLL)</span>
+<span class="syntax1">GLOBAL</span>
+    <span class="syntax1">STRUCT</span> m9             <span class="syntax5">// misma forma que m8: z, camera, height, angle</span>
+        z<span class="syntax3">;</span> camera<span class="syntax3">;</span> height<span class="syntax3">;</span> angle<span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+    scr_x<span class="syntax3">;</span> scr_y<span class="syntax3">;</span>
+<span class="syntax1">BEGIN</span>
+    set_mode<span class="syntax3">(</span><span class="syntax2">320200</span><span class="syntax3">);</span>
+    set_fps<span class="syntax3">(</span><span class="syntax2">60</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+    scr_x <span class="syntax3">=</span> MODE9_SCRW<span class="syntax3">();</span>
+    scr_y <span class="syntax3">=</span> MODE9_SCRH<span class="syntax3">();</span>
+    load_fpg<span class="syntax3">(</span><span class="syntax4">&quot;FPG/MODE9.FPG&quot;</span><span class="syntax3">);</span>
+
+    <span class="syntax5">// 1) Cargar el escenario (malla + textura + escala) en una sola llamada</span>
+    LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+    LOAD_SKY9<span class="syntax3">(</span><span class="syntax4">&quot;MAP/SKY.MAP&quot;</span><span class="syntax3">);</span>      <span class="syntax5">// cielo panoramico</span>
+    MODE9_STEP<span class="syntax3">(</span><span class="syntax2">70</span><span class="syntax3">);</span>                <span class="syntax5">// subir escaleras de hasta 70 uds</span>
+
+    <span class="syntax5">// 2) Situar la cámara y arrancar el render 3D</span>
+    MODE9_SET<span class="syntax3">(</span><span class="syntax2">70</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>              <span class="syntax5">// altura del ojo y pitch</span>
+    START_MODE9<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+
+    <span class="syntax5">// 3) Bucle de juego: mover la cámara</span>
+    <span class="syntax1">LOOP</span>
+        <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_w<span class="syntax3">))</span> advance<span class="syntax3">(</span><span class="syntax2">20</span><span class="syntax3">);</span>  <span class="syntax1">end</span>
+        <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_s<span class="syntax3">))</span> advance<span class="syntax3">(-</span><span class="syntax2">20</span><span class="syntax3">);</span> <span class="syntax1">end</span>
+        angle <span class="syntax3">+=</span> <span class="syntax3">(</span>scr_x<span class="syntax3">/</span><span class="syntax2">2</span> <span class="syntax3">-</span> mouse<span class="syntax3">.</span>x<span class="syntax3">)</span> <span class="syntax3">*</span> <span class="syntax2">200</span><span class="syntax3">;</span>   <span class="syntax5">// girar con el ratón</span>
+        <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_esc<span class="syntax3">))</span> STOP_MODE9<span class="syntax3">();</span> <span class="syntax1">break</span><span class="syntax3">;</span> <span class="syntax1">end</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">END</span>
+<span class="syntax1">END</span>
+</pre>
+    </div>
+    <hr />
+    <p>Sigue por aquí:</p>
+    <ul>
+      <li><a href="funciones.html">Funciones del modo 9</a> &ndash; todas las órdenes de la
+      librería, con ejemplos.</li>
+      <li><a href="modelos.html">Modelos OBJ</a> &ndash; cómo exportar los modelos 3D y sus
+      texturas.</li>
+      <li><a href="limitaciones.html">Limitaciones</a> &ndash; cuánta geometría y cuántos objetos
+      admite, y cómo sortear los topes.</li>
+    </ul>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

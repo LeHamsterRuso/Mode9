@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - LOAD_SKY9()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>LOAD_SKY9()</h1>
+    <p><strong>LOAD_SKY9( &lt;MAP texture&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Loads a panoramic <strong>.MAP</strong> texture as the sky. It replaces the flat background colour: the sky rotates with the camera's horizontal rotation (yaw) and shifts with its vertical tilt (pitch), creating a dome-like feeling.</p>
+    <p>The texture must wrap 360 degrees horizontally (its left and right edges must match up) and uses the same palette as the game. It is deactivated with <a href="sky9_off.html">SKY9_OFF()</a>.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">MAP texture</td><td>Panoramic .MAP file (360-degree horizontal wrap).</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 1 if the sky loads successfully, 0 if it fails.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+LOAD_SKY9<span class="syntax3">(</span><span class="syntax4">&quot;MAP/SKY.MAP&quot;</span><span class="syntax3">);</span>   <span class="syntax5">// 360-degree panoramic sky</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="sky9_off.html">SKY9_OFF()</a> - <a href="set_env_color9.html">SET_ENV_COLOR9()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

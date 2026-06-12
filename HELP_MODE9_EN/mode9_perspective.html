@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_PERSPECTIVE()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_PERSPECTIVE()</h1>
+    <p><strong>MODE9_PERSPECTIVE( &lt;on&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Chooses between drawing textures faster or more accurately. On floors and walls seen at a very steep angle, the texture may appear to "wobble" or warp slightly; that happens because the engine uses approximate calculations for speed. Enabling this option performs the calculations exactly and textures appear perfectly straight, but rendering costs more and the game may run a little slower.</p>
+    <p>It is disabled by default (fast mode) because in most scenes the difference is barely noticeable. Enable it only if that wobble bothers you and your machine has plenty of headroom.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">on</td><td><strong>0</strong> = fast, with a slight wobble on very steep surfaces (default); <strong>1</strong> = perfect textures, somewhat slower.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+MODE9_PERSPECTIVE<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">);</span>   <span class="syntax5">// textures without wobble (slower)</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_downscale.html">MODE9_DOWNSCALE()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

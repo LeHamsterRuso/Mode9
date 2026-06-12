@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_MATERIAL()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_MATERIAL()</h1>
+    <p><strong>MODE9_MATERIAL( &lt;índice&gt; , &lt;textura MAP&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Asigna una textura <strong>.MAP</strong> a un material del escenario. Un OBJ puede declarar varios materiales con <strong>usemtl</strong>; se numeran por orden de aparición: 0, 1, 2... El material <strong>0</strong> es el que carga <a href="load_wld9.html">LOAD_WLD9()</a>.</p>
+    <p>Se llama tras LOAD_WLD9, una vez por cada material que quieras personalizar. Si un material no recibe textura propia, usa la del material 0.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">índice</td><td>Número de material (0..15) en el orden de los <strong>usemtl</strong> del OBJ.</td></tr>
+      <tr><td class="par">textura MAP</td><td>Fichero .MAP a asignar. Si ese material ya tenía textura, se libera antes (sin fugas de memoria).</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 1 si carga la textura, 0 si falla.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// CASTLE.OBJ tiene 3 materiales: 0=Castle, 1=Stairs, 2=Water</span>
+LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>  <span class="syntax5">// material 0</span>
+MODE9_MATERIAL<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/STAIRS.MAP&quot;</span><span class="syntax3">);</span>             <span class="syntax5">// peldanos de la escalera</span>
+MODE9_MATERIAL<span class="syntax3">(</span><span class="syntax2">2</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/WATER.MAP&quot;</span><span class="syntax3">);</span>              <span class="syntax5">// agua que rodea la isla</span>
+</pre>
+    </div>
+    <p>Si un .MAP no existe todavia, ese material cae al material 0 sin provocar un fallo.</p>
+    <hr />
+    Ver: <a href="load_wld9.html">LOAD_WLD9()</a> - <a href="mode9_settex.html">MODE9_SETTEX()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

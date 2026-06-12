@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_OCCLUDE()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_OCCLUDE()</h1>
+    <p><strong>MODE9_OCCLUDE( &lt;on&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Decides whether sprites are hidden when a wall (or another part of the scene) is in front of them. With the option enabled (default), an enemy behind a column is occluded, as expected. If you disable it, sprites are always drawn on top of everything, even when they should be hidden.</p>
+    <p>Disabling it is useful for things you always want visible, such as an objective icon or a map marker, regardless of intervening walls.</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">on</td><td><strong>1</strong> = sprites are occluded by the scene, as expected (default); <strong>0</strong> = sprites are always visible, drawn on top of everything.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+MODE9_OCCLUDE<span class="syntax3">(</span><span class="syntax2">1</span><span class="syntax3">);</span>   <span class="syntax5">// enemy behind a column is hidden (default)</span>
+MODE9_OCCLUDE<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">);</span>   <span class="syntax5">// markers/icons always visible</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_billboard.html">MODE9_BILLBOARD()</a> - <a href="mode9_project.html">MODE9_PROJECT()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

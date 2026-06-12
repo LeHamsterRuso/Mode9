@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_FARCLIP()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_FARCLIP()</h1>
+    <p><strong>MODE9_FARCLIP( &lt;distance&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Defines the maximum draw distance: geometry beyond <strong>distance</strong> DIV2 units is not drawn (pop-in effect). Affects the scene, OBJ models and billboards. <strong>0</strong> means no limit (default).</p>
+    <p>If you enable fog with <a href="set_fog9.html">SET_FOG9()</a>, the far clip is activated automatically using the fog's <strong>far</strong> value (what lies beyond the fog is the background colour and is not drawn).</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">distance</td><td>Maximum draw distance in DIV2 units. 0 = no limit.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+MODE9_FARCLIP<span class="syntax3">(</span><span class="syntax2">1000</span><span class="syntax3">);</span>   <span class="syntax5">// do not draw anything beyond 1000 units</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="set_fog9.html">SET_FOG9()</a> - <a href="mode9_fog_off.html">MODE9_FOG_OFF()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

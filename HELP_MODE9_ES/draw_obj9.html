@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - DRAW_OBJ9()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>DRAW_OBJ9()</h1>
+    <p><strong>DRAW_OBJ9( &lt;handle&gt; , &lt;x&gt; , &lt;y&gt; , &lt;z&gt; , &lt;angle&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Añade a la cola de dibujado una instancia del modelo <strong>handle</strong> (devuelto por <a href="load_obj9.html">LOAD_OBJ9()</a>) en la posición de mundo (x, y, z) en uds DIV2, con la orientación indicada. Hay que llamarla CADA FRAME, antes del FRAME, para cada instancia que quieras ver.</p>
+    <p>La cola se vacía automáticamente despues de renderizar todas las vistas, de modo que un mismo modelo se puede dibujar muchas veces en posiciones distintas en el mismo frame.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">handle</td><td>Handle del modelo devuelto por LOAD_OBJ9.</td></tr>
+      <tr><td class="par">x, y, z</td><td>Posición de mundo en uds DIV2 (x,y en el suelo; z = altura).</td></tr>
+      <tr><td class="par">angle</td><td>Orientación en milésimas de grado (convencion DIV2; 180000 = 180 grados).</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <div class="nota"><strong>Nota:</strong> Mientras el modelo se está cargando en segundo plano, DRAW_OBJ9 lo ignora sin error: el objeto aparece automáticamente al terminar la carga.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Dibujar tres caballeros en fila, mirando al sur</span>
+DRAW_OBJ9<span class="syntax3">(</span>h_npc<span class="syntax3">,</span> <span class="syntax3">-</span><span class="syntax2">200</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+DRAW_OBJ9<span class="syntax3">(</span>h_npc<span class="syntax3">,</span>    <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+DRAW_OBJ9<span class="syntax3">(</span>h_npc<span class="syntax3">,</span>  <span class="syntax2">200</span><span class="syntax3">,</span> <span class="syntax2">500</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="load_obj9.html">LOAD_OBJ9()</a> - <a href="draw_obj9_anim.html">DRAW_OBJ9_ANIM()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

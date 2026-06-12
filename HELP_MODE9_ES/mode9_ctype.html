@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_CTYPE()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_CTYPE()</h1>
+    <p><strong>MODE9_CTYPE( &lt;n&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Fija el valor de la constante <strong>c_m9</strong>, el ctype "lógico" que marca a un proceso como billboard automático (analogo a c_m7 en el modo 7). Debe COINCIDIR con la constante <strong>c_m9</strong> declarada en el PRG. El valor por defecto es <strong>200</strong>.</p>
+    <p>Solo necesitas llamarla si por algún motivo quieres usar un valor distinto de 200 en tu PRG; en ese caso, cambia el CONST y avisa a la DLL con esta función.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">n</td><td>Nuevo valor de c_m9 (debe ser &gt; 2 para no chocar con c_screen/c_scroll/c_m7).</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax1">CONST</span> c_m9 <span class="syntax3">=</span> <span class="syntax2">200</span><span class="syntax3">;</span>       <span class="syntax5">// en el PRG</span>
+<span class="syntax3">...</span>
+MODE9_CTYPE<span class="syntax3">(</span>c_m9<span class="syntax3">);</span>      <span class="syntax5">// informar a la DLL (solo si cambias el valor por defecto)</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_billboard.html">MODE9_BILLBOARD()</a> - <a href="mode9_loadfpg.html">MODE9_LOADFPG()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

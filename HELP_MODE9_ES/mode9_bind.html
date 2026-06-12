@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_BIND()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_BIND()</h1>
+    <p><strong>MODE9_BIND( &lt;OFFSET m9.z&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Le dice al modo 9 de QUE estructura <strong>m9</strong> debe leer la altura y la inclinación de la cámara en cada fotograma. "Vincular" (bind) significa simplemente conectar tu variable <strong>m9</strong> con la DLL para que, cuando tu cambies <strong>m9.height</strong> o <strong>m9.angle</strong> en tu programa, la cámara reaccione al momento.</p>
+    <p>En la practica <strong>casi nunca</strong> necesitas llamarla: <a href="start_mode9.html">START_MODE9()</a> ya hace este enlace por ti con su segundo parámetro. Solo resulta útil en un caso concreto: cuando tienes <strong>varias cámaras</strong>, cada una con su propia estructura m9, y quieres cambiar de una a otra sin parar y rearrancar el render.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">OFFSET m9.z</td><td>La estructura <strong>m9</strong> que quieres que use el modo 9. Se pasa siempre su primer campo con <strong>OFFSET m9.z</strong> (o <strong>&amp;m9.z</strong>).</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Dos cámaras: la del jugador y la de una cámara de seguridad.</span>
+<span class="syntax5">// Cada una guarda SU altura y SU inclinación en su propia estructura.</span>
+<span class="syntax1">GLOBAL</span>
+    <span class="syntax1">STRUCT</span> m9_jugador  z<span class="syntax3">;</span> camera<span class="syntax3">;</span> height<span class="syntax3">;</span> angle<span class="syntax3">;</span>  <span class="syntax1">END</span>
+    <span class="syntax1">STRUCT</span> m9_camseg   z<span class="syntax3">;</span> camera<span class="syntax3">;</span> height<span class="syntax3">;</span> angle<span class="syntax3">;</span>  <span class="syntax1">END</span>
+<span class="syntax1">BEGIN</span>
+    <span class="syntax3">...</span>
+    <span class="syntax5">// Al pulsar TAB, cambiar la vista a la cámara de seguridad</span>
+    <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_tab<span class="syntax3">))</span>
+        MODE9_BIND<span class="syntax3">(</span><span class="syntax1">OFFSET</span> m9_camseg<span class="syntax3">.</span>z<span class="syntax3">);</span>   <span class="syntax5">// ahora el 3D usa la otra cámara</span>
+    <span class="syntax1">end</span>
+    <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_space<span class="syntax3">))</span>
+        MODE9_BIND<span class="syntax3">(</span><span class="syntax1">OFFSET</span> m9_jugador<span class="syntax3">.</span>z<span class="syntax3">);</span>  <span class="syntax5">// volver a la vista del jugador</span>
+    <span class="syntax1">end</span>
+<span class="syntax1">END</span>
+</pre>
+    </div>
+    <p>Si tu juego tiene una sola cámara (lo normal), olvidate de esta función: con el segundo parámetro de <a href="start_mode9.html">START_MODE9()</a> es suficiente.</p>
+    <hr />
+    Ver: <a href="start_mode9.html">START_MODE9()</a> - <a href="mode9_set.html">MODE9_SET()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_DOWNSCALE()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_DOWNSCALE()</h1>
+    <p><strong>MODE9_DOWNSCALE( &lt;n&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Es un truco para ir más rápido a costa de un poco de calidad de imagen: dibuja el 3D a menos resolución de la real y luego estira el resultado repitiendo líneas. La imagen se ve más "gorda" (más pixelada), pero el motor tiene que pintar muchos menos píxeles, así que va más fluido. Útil si el juego te va lento en un ordenador modesto.</p>
+    <p>Cuánto ganas depende de cuántos píxeles tenga que pintar el motor: en escenas grandes y muy cubiertas de texturas, el valor 2 puede casi duplicar los FPS; en escenas vacías apenas se nota.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">n</td><td><strong>1</strong> = resolución nativa (por defecto); <strong>2</strong> = 1 de cada 2 líneas (~2x relleno); <strong>3</strong> = 1 de cada 3 (~3x); <strong>4</strong> = 1 de cada 4 (~4x, píxel art muy grueso).</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+MODE9_DOWNSCALE<span class="syntax3">(</span><span class="syntax2">2</span><span class="syntax3">);</span>   <span class="syntax5">// medio render: el doble de velocidad de relleno</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_perspective.html">MODE9_PERSPECTIVE()</a> - <a href="mode9_farclip.html">MODE9_FARCLIP()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

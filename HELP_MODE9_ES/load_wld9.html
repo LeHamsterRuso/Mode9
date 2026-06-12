@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - LOAD_WLD9()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>LOAD_WLD9()</h1>
+    <p><strong>LOAD_WLD9( &lt;fichero OBJ&gt; , &lt;textura MAP&gt; , &lt;escala&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Carga el escenario 3D en UNA sola llamada: la malla del fichero <strong>.OBJ</strong>, su textura <strong>.MAP</strong> y la escala (unidades DIV2 por unidad del OBJ). Es el equivalente a <strong>load_wld()</strong> del modo 8: sirve tanto para cargar el primer nivel como para CAMBIAR de nivel en caliente.</p>
+    <p>El escenario es una malla arbitraria (paredes, suelos y techos con cualquier inclinación) modelada por ejemplo en Blender y exportada como OBJ triangulado con Y hacia arriba. La textura de este parámetro es el <strong>material 0</strong> y se aplica por defecto a todos los materiales; con <a href="mode9_material.html">MODE9_MATERIAL()</a> puedes dar una textura distinta a cada <strong>usemtl</strong>.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">fichero OBJ</td><td>Nombre del fichero .OBJ del escenario. Recuerda el límite de DOS: el nombre base debe tener 8 caracteres o menos, o la carga fallara en silencio.</td></tr>
+      <tr><td class="par">textura MAP</td><td>Fichero .MAP del material 0. Si pones <strong>""</strong> o <strong>"0"</strong>, el escenario se dibuja con flat-shading (sombreado plano sin textura).</td></tr>
+      <tr><td class="par">escala</td><td>Unidades DIV2 por cada unidad del OBJ (unitscale). 100 es lo habitual; el doble (200) hace el escenario el doble de grande. Un valor &lt;=0 no cambia la escala actual.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> El número de triángulos cargados (0 si falla la carga).</p>
+    <div class="nota"><strong>Nota:</strong> La carga es BLOQUEANTE: con escenarios muy grandes puede saltar la excepción 142 ("el proceso parece bloqueado, esperando FRAME"). Si ocurre, puedes ignorarla con <strong>ignore_error(142)</strong>.</div>
+    <div class="nota"><strong>Nota:</strong> Cambiar de mapa con LOAD_WLD9 NO requiere parar el modo 9: libera la malla y los materiales antiguos y reconstruye las colisiones, sin tocar la cámara.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Cargar el patio del castillo (material 0 = CASTLE.MAP)</span>
+ntris <span class="syntax3">=</span> LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+<span class="syntax1">if</span> <span class="syntax3">(</span>ntris <span class="syntax3">==</span> <span class="syntax2">0</span><span class="syntax3">)</span>
+    say<span class="syntax3">(</span><span class="syntax4">&quot;No se pudo cargar el escenario&quot;</span><span class="syntax3">);</span>
+<span class="syntax1">end</span>
+
+<span class="syntax5">// ... más tarde, al cruzar una puerta, cambiar de mapa EN CALIENTE:</span>
+LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTIN.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTIN.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+x <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span> y <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">300</span><span class="syntax3">;</span> angle <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">90000</span><span class="syntax3">;</span>   <span class="syntax5">// recolocar al jugador en el nuevo mapa</span>
+</pre>
+    </div>
+    <p>El valor de retorno (número de triángulos) sirve para comprobar que la carga ha ido bien: si es 0, el fichero no existe o no es válido.</p>
+    <hr />
+    Ver: <a href="mode9_material.html">MODE9_MATERIAL()</a> - <a href="mode9_settex.html">MODE9_SETTEX()</a> - <a href="mode9_unitscale.html">MODE9_UNITSCALE()</a> - <a href="start_mode9.html">START_MODE9()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

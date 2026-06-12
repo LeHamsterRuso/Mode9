@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_OBJ9_READY()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_OBJ9_READY()</h1>
+    <p><strong>MODE9_OBJ9_READY( &lt;handle&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Consulta el estado de carga de un modelo de <a href="load_obj9.html">LOAD_OBJ9()</a> o <a href="load_obj9_anim.html">LOAD_OBJ9_ANIM()</a>, que cargan en segundo plano.</p>
+    <p>Útil para mostrar una barra de "Cargando..." o esperar a que todo este listo antes de empezar la partida. No es obligatorio: DRAW_OBJ9 ya ignora por su cuenta los modelos que no están listos.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">handle</td><td>Handle del modelo a consultar.</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 1 = cargado; 0 = aun cargando; -1 = handle invalido o fallo.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+h_npc <span class="syntax3">=</span> LOAD_OBJ9<span class="syntax3">(</span><span class="syntax4">&quot;KNIGHT.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/KNIGHT.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+<span class="syntax5">// Esperar a que el modelo este listo mostrando un mensaje</span>
+<span class="syntax1">while</span> <span class="syntax3">(</span>MODE9_OBJ9_READY<span class="syntax3">(</span>h_npc<span class="syntax3">)</span> <span class="syntax3">==</span> <span class="syntax2">0</span><span class="syntax3">)</span>
+    write<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">160</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">,</span> <span class="syntax2">4</span><span class="syntax3">,</span> <span class="syntax4">&quot;Cargando...&quot;</span><span class="syntax3">);</span>
+    <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+<span class="syntax1">end</span>
+delete_text<span class="syntax3">(</span>all_text<span class="syntax3">);</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="load_obj9.html">LOAD_OBJ9()</a> - <a href="load_obj9_anim.html">LOAD_OBJ9_ANIM()</a> - <a href="draw_obj9.html">DRAW_OBJ9()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

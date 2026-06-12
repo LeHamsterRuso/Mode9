@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - STOP_MODE9()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>STOP_MODE9()</h1>
+    <p><strong>STOP_MODE9()</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Desactiva el render del escenario 3D. Tras llamarla, la capa de fondo vuelve a ser la de DIV2: <strong>put_screen</strong>, put y scroll vuelven a verse con normalidad, por lo que es la función adecuada antes de mostrar una pantalla 2D (menú de pausa, pantalla de fin de partida, etc.).</p>
+    <p>El escenario, las texturas y los modelos cargados se conservan: puedes volver a activar el render con <a href="start_mode9.html">START_MODE9()</a> sin recargar nada.</p>
+    <p>Esta fue la clave para que <strong>put_screen</strong> volviera a funcionar: mientras el modo 9 está activo, la DLL es la dueña de la capa de fondo; al pararlo, restituye el fondo 2D del motor.</p>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <div class="nota"><strong>Nota:</strong> Para cambiar de mapa NO hace falta parar el modo 9: <a href="load_wld9.html">LOAD_WLD9()</a> recarga el escenario en caliente sin tocar la cámara ni el estado del render.</div>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Pausa: parar el 3D, mostrar un menú 2D y reanudar</span>
+<span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_esc<span class="syntax3">))</span>
+    STOP_MODE9<span class="syntax3">();</span>                       <span class="syntax5">// el fondo vuelve a ser 2D</span>
+    write<span class="syntax3">(</span><span class="syntax2">0</span><span class="syntax3">,</span> <span class="syntax2">160</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">,</span> <span class="syntax2">4</span><span class="syntax3">,</span> <span class="syntax4">&quot;PAUSA - pulsa INTRO&quot;</span><span class="syntax3">);</span>
+    <span class="syntax1">repeat</span>
+        <span class="syntax1">FRAME</span><span class="syntax3">;</span>
+    <span class="syntax1">until</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_enter<span class="syntax3">))</span>
+    delete_text<span class="syntax3">(</span>all_text<span class="syntax3">);</span>
+    START_MODE9<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>    <span class="syntax5">// reanudar el render 3D</span>
+<span class="syntax1">end</span>
+</pre>
+    </div>
+    <p>Mientras el modo 9 está parado, los textos y los procesos con gráfico (sprites) se siguen viendo; lo que se restaura es el fondo 2D del motor.</p>
+    <hr />
+    Ver: <a href="start_mode9.html">START_MODE9()</a> - <a href="load_wld9.html">LOAD_WLD9()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

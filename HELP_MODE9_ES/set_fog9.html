@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - SET_FOG9()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>SET_FOG9()</h1>
+    <p><strong>SET_FOG9( &lt;near&gt; , &lt;far&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Activa la <strong>niebla</strong>: hace que lo lejano se vaya difuminando hacia un color, como ocurre con la bruma de verdad. Sirve para dar sensación de profundidad y, de paso, para disimular el límite del escenario (en lugar de ver como aparecen las cosas de golpe a lo lejos, se funden poco a poco). Es la misma idea que el <strong>set_fog</strong> del modo 8.</p>
+    <p>El COLOR de la niebla es el que hayas fijado con <a href="set_env_color9.html">SET_ENV_COLOR9()</a>. La geometría se mezcla con ese color de forma gradual: se ve nítida hasta la distancia <strong>near</strong> y queda completamente teñida (oculta) a partir de <strong>far</strong>.</p>
+    <p>Activar la niebla auto-activa el far clip al valor <strong>far</strong>: lo que queda más allá no se dibuja (es ya del color de fondo).</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">near</td><td>Distancia (uds DIV2) hasta la que NO hay niebla (todo nítido).</td></tr>
+      <tr><td class="par">far</td><td>Distancia (uds DIV2) a la que la niebla es total (todo del color de fondo).</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+SET_ENV_COLOR9<span class="syntax3">(</span><span class="syntax2">20</span><span class="syntax3">,</span> <span class="syntax2">20</span><span class="syntax3">,</span> <span class="syntax2">28</span><span class="syntax3">);</span>   <span class="syntax5">// color de la niebla</span>
+SET_FOG9<span class="syntax3">(</span><span class="syntax2">300</span><span class="syntax3">,</span> <span class="syntax2">1200</span><span class="syntax3">);</span>          <span class="syntax5">// nítido hasta 300, opaco a 1200</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_fog_off.html">MODE9_FOG_OFF()</a> - <a href="set_env_color9.html">SET_ENV_COLOR9()</a> - <a href="mode9_farclip.html">MODE9_FARCLIP()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ayuda del Modo 9 - MODE9_FOV()</title>
+    <meta name="description" content="Ayuda del modo 9 (escenarios 3D OBJ) para DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Inicio</a></li>
+        <li><a class="botonempezar" href="empezar.html">Por dónde empezar</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Funciones</a></li>
+        <li><a class="botonmodelos" href="modelos.html">Modelos OBJ</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitaciones</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_FOV()</h1>
+    <p><strong>MODE9_FOV( &lt;grados&gt; )</strong></p>
+    <p><strong>Descripción:</strong></p>
+    <p>Ajusta el "ángulo de visión": cuánto mundo abarca la cámara de lado a lado, igual que el zoom de una cámara de fotos. Es lo que en los juegos 3D se llama <strong>FOV</strong> (<em>field of view</em>, campo de visión). El valor por defecto (unos 71 grados) da una vista natural y equilibrada.</p>
+    <p>Si bajas el ángulo (por ejemplo 60) es como hacer zoom: ves menos a los lados pero todo más "cerca". Si lo subes (90 o 110) consigues un efecto de gran angular: ves mucho más alrededor, con más sensación de velocidad, aunque las cosas de los bordes se ven algo estiradas.</p>
+    <p><strong>Parámetros:</strong></p>
+    <table class="params">
+      <tr><th>Parámetro</th><th>Significado</th></tr>
+      <tr><td class="par">grados</td><td>Ángulo de visión horizontal: 60 = vista cerrada (zoom), 71 = natural (por defecto), 90 = amplia, 110 = muy abierta (gran angular).</td></tr>
+    </table>
+    <p class="retorna"><strong>Retorna:</strong> 0.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Programa de ejemplo:
+      </div>
+<pre class="ejprograma">
+MODE9_FOV<span class="syntax3">(</span><span class="syntax2">90</span><span class="syntax3">);</span>   <span class="syntax5">// gran angular</span>
+</pre>
+    </div>
+    <hr />
+    Ver: <a href="mode9_set.html">MODE9_SET()</a>
+    <div class="pie">
+      Ayuda del Modo 9 &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>

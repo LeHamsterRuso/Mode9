@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mode 9 Help - MODE9_SETTEX()</title>
+    <meta name="description" content="Mode 9 help (3D OBJ scenes) for DIV Games Studio 2" />
+    <link href="estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="botonera">
+      <ul>
+        <li><a class="botoninicio" href="index.html">Home</a></li>
+        <li><a class="botonempezar" href="empezar.html">Getting started</a></li>
+        <li><a class="botonfunciones" href="funciones.html">Functions</a></li>
+        <li><a class="botonmodelos" href="modelos.html">OBJ Models</a></li>
+        <li><a class="botonlimites" href="limitaciones.html">Limitations</a></li>
+      </ul>
+    </div>
+    <h1>MODE9_SETTEX()</h1>
+    <p><strong>MODE9_SETTEX( &lt;MAP texture&gt; )</strong></p>
+    <p><strong>Description:</strong></p>
+    <p>Replaces the texture of <strong>material 0</strong> (the default material loaded by <a href="load_wld9.html">LOAD_WLD9()</a>) on its own. It is equivalent to <strong>MODE9_MATERIAL(0, map)</strong>.</p>
+    <p>Useful for re-texturing the scene without reloading the mesh (for example, changing a level's appearance based on the time of day).</p>
+    <p><strong>Parameters:</strong></p>
+    <table class="params">
+      <tr><th>Parameter</th><th>Meaning</th></tr>
+      <tr><td class="par">MAP texture</td><td>.MAP file to replace the material 0 texture.</td></tr>
+    </table>
+    <p class="retorna"><strong>Returns:</strong> 1 if the texture loads successfully, 0 if it fails.</p>
+    <hr />
+    <div class="ejemplo">
+      <div class="ejtitulo">
+        Example program:
+      </div>
+<pre class="ejprograma">
+<span class="syntax5">// Change the scene texture without reloading the OBJ</span>
+MODE9_SETTEX<span class="syntax3">(</span><span class="syntax4">&quot;MAP/CASTLE2.MAP&quot;</span><span class="syntax3">);</span>
+</pre>
+    </div>
+    <hr />
+    See: <a href="mode9_material.html">MODE9_MATERIAL()</a> - <a href="load_wld9.html">LOAD_WLD9()</a>
+    <div class="pie">
+      Mode 9 Help &nbsp;&middot;&nbsp;
+      Sebasti&aacute;n J. Moncho Maquet
+    </div>
+  </body>
+</html>
