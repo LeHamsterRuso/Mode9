@@ -78,15 +78,23 @@
     set_fps<span class="syntax3">(</span><span class="syntax2">60</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
     scr_x <span class="syntax3">=</span> MODE9_SCRW<span class="syntax3">();</span>
     scr_y <span class="syntax3">=</span> MODE9_SCRH<span class="syntax3">();</span>
-    load_fpg<span class="syntax3">(</span><span class="syntax4">&quot;FPG/MODE9.FPG&quot;</span><span class="syntax3">);</span>
 
     <span class="syntax5">// 1) Cargar el escenario (malla + textura + escala) en una sola llamada</span>
-    LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+    LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;OBJ/CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
     LOAD_SKY9<span class="syntax3">(</span><span class="syntax4">&quot;MAP/SKY.MAP&quot;</span><span class="syntax3">);</span>      <span class="syntax5">// cielo panoramico</span>
     MODE9_STEP<span class="syntax3">(</span><span class="syntax2">70</span><span class="syntax3">);</span>                <span class="syntax5">// subir escaleras de hasta 70 uds</span>
 
-    <span class="syntax5">// 2) Situar la cámara y arrancar el render 3D</span>
-    MODE9_SET<span class="syntax3">(</span><span class="syntax2">70</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>              <span class="syntax5">// altura del ojo y pitch</span>
+    <span class="syntax5">// 2) Lanzar el proceso de cámara (asigna m9.camera, m9.height y arranca el render)</span>
+    camara<span class="syntax3">();</span>
+<span class="syntax1">END</span>
+
+<span class="syntax1">PROCESS</span> camara<span class="syntax3">()</span>
+<span class="syntax1">BEGIN</span>
+    x <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span>  y <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">1500</span><span class="syntax3">;</span>  z <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span>
+    angle <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">90000</span><span class="syntax3">;</span>
+    m9<span class="syntax3">.</span>camera <span class="syntax3">=</span> <span class="syntax1">id</span><span class="syntax3">;</span>              <span class="syntax5">// IMPRESCINDIBLE: la DLL lo lee cada frame</span>
+    m9<span class="syntax3">.</span>height <span class="syntax3">=</span> <span class="syntax2">160</span><span class="syntax3">;</span>             <span class="syntax5">// altura del ojo</span>
+    m9<span class="syntax3">.</span>angle  <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span>               <span class="syntax5">// pitch (0 = horizonte)</span>
     START_MODE9<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
 
     <span class="syntax5">// 3) Bucle de juego: mover la cámara</span>

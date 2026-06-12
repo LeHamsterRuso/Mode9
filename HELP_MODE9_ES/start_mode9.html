@@ -25,7 +25,7 @@
     <p><strong>Parámetros:</strong></p>
     <table class="params">
       <tr><th>Parámetro</th><th>Significado</th></tr>
-      <tr><td class="par">id de la cámara</td><td>Código identificador del proceso en cuya posición se sitúa la cámara. Normalmente <strong>id</strong> (el propio proceso que controla el juego).</td></tr>
+      <tr><td class="par">id de la cámara</td><td>Código identificador del proceso en cuya posición se sitúa la cámara. Debes asignar <strong>m9.camera</strong> al mismo valor antes de llamar a START_MODE9; la DLL lo relee del struct cada frame.</td></tr>
       <tr><td class="par">OFFSET m9.z</td><td>Dirección de la estructura <strong>m9</strong> (se pasa <strong>&amp;m9.z</strong>, el primer campo). La DLL lee de ahí <strong>m9.height</strong> (altura del ojo) y <strong>m9.angle</strong> (pitch) cada frame. Equivale al BIND de la estructura.</td></tr>
       <tr><td class="par">región</td><td>Región de pantalla: <strong>0</strong> = pantalla completa; <strong>1..15</strong> = región definida previamente con <a href="mode9_region.html">MODE9_REGION()</a> (varias llamadas crean una pantalla partida por regiones, como las ventanas del modo 8).</td></tr>
     </table>
@@ -48,12 +48,17 @@
 <span class="syntax1">BEGIN</span>
     set_mode<span class="syntax3">(</span><span class="syntax2">320200</span><span class="syntax3">);</span>
     set_fps<span class="syntax3">(</span><span class="syntax2">60</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
-    load_fpg<span class="syntax3">(</span><span class="syntax4">&quot;FPG/MODE9.FPG&quot;</span><span class="syntax3">);</span>
-    <span class="syntax5">// Cargar el escenario: malla + textura + escala</span>
-    LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
-    <span class="syntax5">// Situar la cámara a 70 uds de altura</span>
-    MODE9_SET<span class="syntax3">(</span><span class="syntax2">70</span><span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
-    <span class="syntax5">// Activar el render en pantalla completa</span>
+    LOAD_WLD9<span class="syntax3">(</span><span class="syntax4">&quot;OBJ/CASTLE.OBJ&quot;</span><span class="syntax3">,</span> <span class="syntax4">&quot;MAP/CASTLE.MAP&quot;</span><span class="syntax3">,</span> <span class="syntax2">100</span><span class="syntax3">);</span>
+    camara<span class="syntax3">();</span>                <span class="syntax5">// lanzar el proceso de cámara</span>
+<span class="syntax1">END</span>
+
+<span class="syntax1">PROCESS</span> camara<span class="syntax3">()</span>
+<span class="syntax1">BEGIN</span>
+    x <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span>  y <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">1500</span><span class="syntax3">;</span>  z <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span>
+    angle <span class="syntax3">=</span> <span class="syntax3">-</span><span class="syntax2">90000</span><span class="syntax3">;</span>         <span class="syntax5">// mirando hacia el porton</span>
+    m9<span class="syntax3">.</span>camera <span class="syntax3">=</span> <span class="syntax1">id</span><span class="syntax3">;</span>         <span class="syntax5">// IMPRESCINDIBLE: la DLL lo lee cada frame</span>
+    m9<span class="syntax3">.</span>height <span class="syntax3">=</span> <span class="syntax2">160</span><span class="syntax3">;</span>        <span class="syntax5">// altura del ojo (uds DIV2)</span>
+    m9<span class="syntax3">.</span>angle  <span class="syntax3">=</span> <span class="syntax2">0</span><span class="syntax3">;</span>          <span class="syntax5">// pitch (0 = horizonte)</span>
     START_MODE9<span class="syntax3">(</span><span class="syntax1">id</span><span class="syntax3">,</span> <span class="syntax1">OFFSET</span> m9<span class="syntax3">.</span>z<span class="syntax3">,</span> <span class="syntax2">0</span><span class="syntax3">);</span>
     <span class="syntax1">LOOP</span>
         <span class="syntax1">if</span> <span class="syntax3">(</span>key<span class="syntax3">(</span>_up<span class="syntax3">))</span>   advance<span class="syntax3">(</span><span class="syntax2">20</span><span class="syntax3">);</span>  <span class="syntax1">end</span>
@@ -65,7 +70,7 @@
 <span class="syntax1">END</span>
 </pre>
     </div>
-    <p>Este programa carga un escenario 3D y deja moverse por él. Fíjate en que mover la cámara es tan sencillo como en un juego 2D normal: <strong>advance()</strong> la adelanta y cambiar el <strong>angle</strong> del proceso la hace girar, exactamente igual que harías con cualquier proceso, solo que ahora lo que ves es el mundo 3D desde su posición.</p>
+    <p>La cámara vive en su propio proceso: asignar <strong>m9.camera = id</strong> le dice a la DLL qué proceso seguir (lo relee cada frame), <strong>m9.height</strong> fija la altura del ojo y <strong>START_MODE9</strong> arranca el render. Mover la cámara es entonces idéntico a mover cualquier proceso de DIV: <strong>advance()</strong> avanza y cambiar <strong>angle</strong> gira, solo que ahora lo que ves es el mundo 3D desde esa posición.</p>
     <hr />
     Ver: <a href="stop_mode9.html">STOP_MODE9()</a> - <a href="load_wld9.html">LOAD_WLD9()</a> - <a href="mode9_set.html">MODE9_SET()</a> - <a href="mode9_region.html">MODE9_REGION()</a>
     <div class="pie">
