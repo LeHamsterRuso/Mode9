@@ -1,4 +1,4 @@
-MIT License
+MIT License (source code only — see asset notice at the bottom)
 
 Copyright © 2026 Sebastian J. Moncho Maquet
 
@@ -19,3 +19,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+-------------------------------------------------------------------------------
+
+ASSET NOTICE
+
+The MIT License above applies ONLY to the source code. The bundled assets
+(graphics, sprites, 3D models, textures, and characters) are NOT licensed for
+reuse in other projects. Some of them resemble characters owned by third
+parties and may be subject to their copyright/trademark restrictions. They are
+included here solely for demonstration and preservation purposes, and must not
+be redistributed or reused outside this project.

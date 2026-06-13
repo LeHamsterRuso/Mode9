@@ -273,6 +273,12 @@ The pre-built `BIN/MODE9.DLL` works out of the box — recompilation is only nee
 
 ## License
 
+### Source code — MIT License
+
+The **source code** of this library (the "Software") is released under the MIT
+License. You are free to download, modify, reuse, and redistribute it; the only
+condition when redistributing is to keep the copyright notice and attribution.
+
 MIT License
 
 Copyright © 2026 Sebastian J. Moncho Maquet
@@ -294,3 +300,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+### Assets — not covered by the MIT License
+
+The MIT License above applies **only to the source code**. The bundled assets
+(graphics, sprites, 3D models, textures, and characters) are **not** licensed
+for reuse in other projects. Some of them resemble characters owned by third
+parties and may be subject to their copyright/trademark restrictions. They are
+included here solely for demonstration and preservation purposes, and must not
+be redistributed or reused outside this project.
